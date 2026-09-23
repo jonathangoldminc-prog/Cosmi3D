@@ -6,7 +6,7 @@
 <title>Parcours Scanner Cosmilab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Poppins:wght@300;400;500;600;700;800&display=swap">
 <style>
 :root{
   --red:#D7132F; --red-deep:#A80E24; --red-soft:#FCE8EB;
@@ -72,11 +72,14 @@ section{padding-block:64px 8px}
 .phases span{display:inline-flex;align-items:center;gap:8px}
 .phases i{width:10px;height:10px;border-radius:50%;background:var(--red)}
 .phases i.o{background:transparent;border:2px solid var(--red)}
-.stepper-scroll{overflow-x:auto;padding-bottom:6px;margin-inline:-4px}
+.stepper-scroll{overflow-x:auto;padding-block:18px 10px;margin-inline:-4px}
 .stepper{position:relative;display:grid;grid-template-columns:repeat(7,minmax(118px,1fr));min-width:840px;padding:0 4px}
 .track,.fill{position:absolute;left:calc(100%/14);right:calc(100%/14);top:27px;height:4px;border-radius:4px;background:var(--line)}
 .fill{background:var(--red);right:auto;width:0;transition:width .55s cubic-bezier(.2,.8,.2,1)}
-.step{position:relative;z-index:1;background:none;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:10px;padding:0 6px 8px;text-align:center}
+.step{position:relative;z-index:1;background:none;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:10px;padding:0 6px 8px;text-align:center;outline:none}
+.step:focus-visible{outline:none}
+.step:focus-visible .dot{outline:3px solid var(--ink);outline-offset:5px}
+.step .txt{display:flex;flex-direction:column;align-items:center;gap:6px}
 .dot{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:20px;background:var(--surface);border:3px solid var(--line);color:var(--muted);transition:all .3s cubic-bezier(.2,.8,.2,1)}
 .step.onb .dot{border-style:solid}
 .step:hover .dot{border-color:var(--red);color:var(--red);transform:scale(1.06)}
@@ -86,6 +89,17 @@ section{padding-block:64px 8px}
 .step .lbl{font-size:14px;font-weight:600;line-height:1.3;color:var(--ink-2)}
 .step[aria-selected="true"] .lbl{color:var(--ink)}
 
+@media (max-width:760px){
+  .stepper-scroll{overflow:visible;margin:0;padding-block:4px}
+  .stepper{grid-template-columns:1fr;min-width:0;row-gap:2px;padding:0}
+  .track,.fill{display:none}
+  .step{flex-direction:row;align-items:center;text-align:left;gap:14px;padding:6px 8px;border-radius:14px}
+  .step[aria-selected="true"]{background:var(--surface)}
+  .step .txt{align-items:flex-start;gap:0}
+  .dot{width:44px;height:44px;font-size:16px;flex-shrink:0}
+  .step:hover .dot{transform:none}
+  .step[aria-selected="true"] .dot{transform:none;box-shadow:0 0 0 5px color-mix(in srgb,var(--red) 18%,transparent)}
+}
 /* PANEL */
 .panel{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
 .panel-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:22px;align-items:center;padding:28px 32px;border-bottom:1px solid var(--line)}
@@ -158,18 +172,6 @@ section{padding-block:64px 8px}
 .acc-body{padding:0 20px 20px 74px;color:var(--ink-2);font-size:15px}
 .acc-body ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px}
 @media (max-width:760px){.acc{grid-template-columns:1fr}.acc-body{padding-left:20px}}
-
-/* WARRANTY */
-.warr{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:28px 30px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:36px;margin-top:14px}
-.bars{display:flex;flex-direction:column;gap:14px;margin-top:18px}
-.bar-row{display:grid;grid-template-columns:190px minmax(0,1fr) 64px;gap:14px;align-items:center;font-size:14px}
-.bar{height:12px;border-radius:6px;background:var(--chip);overflow:hidden}
-.bar i{display:block;height:100%;background:var(--red);border-radius:6px;width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
-.bar-row b{text-align:right;font-variant-numeric:tabular-nums;color:var(--red)}
-.axis{display:grid;grid-template-columns:190px minmax(0,1fr) 64px;gap:14px;font-size:11px;color:var(--muted)}
-.axis div{display:flex;justify-content:space-between}
-.warr ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:10px;font-size:15px;color:var(--ink-2)}
-@media (max-width:760px){.warr{grid-template-columns:1fr}.bar-row,.axis{grid-template-columns:120px minmax(0,1fr) 52px}}
 
 /* FOOT */
 footer{margin-top:64px;background:#141214;color:#F4F2F3}
@@ -300,6 +302,80 @@ footer p{margin:0 0 8px;font-size:14px;opacity:.85}
 .email .ef{background:#141214;color:#F4F2F3;padding:18px 28px;font-size:12px;line-height:1.6}
 .ph{background:#FFF3C4;color:#6A4B00;border-radius:4px;padding:0 4px;font-weight:600}
 @media (max-width:860px){.mail-wrap{grid-template-columns:1fr}.inbox{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line)}.inbox button{min-width:200px;border-bottom:0;border-right:1px solid var(--line)}.mail{padding:18px 12px}.email .eb{padding:20px}}
+
+/* SIGNATURE + POLICY */
+.policy{border-radius:12px;background:color-mix(in srgb,var(--red-soft) 70%,var(--surface));padding:14px 16px;font-size:14px;color:var(--ink-2)}
+.policy strong{color:var(--ink)}
+.doc-shell{border:1.5px solid var(--line);border-radius:16px;overflow:hidden}
+.doc-bar{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--chip);font-size:12px;font-weight:600;color:var(--muted)}
+#readPct{color:var(--red)}
+.doc{height:420px;overflow-y:auto;background:#E9E7E8;padding:16px}
+.paper{background:#fff;color:#141214;border-radius:6px;padding:26px 28px;box-shadow:0 2px 10px rgba(0,0,0,.08);font-size:13px;line-height:1.6}
+.paper-head{display:flex;flex-direction:column;gap:2px;border-bottom:2px solid #D7132F;padding-bottom:10px;margin-bottom:12px}
+.paper-head b{font-size:15px;color:#D7132F;letter-spacing:.04em}
+.paper-head span{font-weight:600}
+.paper .parties{margin:0 0 10px}
+.arts-list{margin:0;padding-left:20px;display:grid;gap:7px}
+.arts-list b{color:#141214}
+.paper-head small{font-size:11px;color:#6B676B;font-weight:500}
+.paper .dh{margin:20px 0 8px;font-size:14px;font-weight:700;color:#D7132F;text-transform:uppercase;letter-spacing:.06em}
+.paper p{margin:0 0 9px;text-align:justify}
+.paper .dt{width:100%;border-collapse:collapse;margin:6px 0 12px;font-size:12px}
+.paper .dt th{background:#141214;color:#fff;text-align:left;padding:6px 8px;font-weight:600}
+.paper .dt td{border:1px solid #E6E3E4;padding:5px 8px;vertical-align:top}
+.paper .dt tr.grp td{background:#F0EEEF;font-weight:700;color:#D7132F}
+.paper .dt td:last-child{white-space:nowrap}
+.paper .sigl{margin:0 0 6px;font-weight:600;text-align:left}
+.paper .dfill{font-weight:500;border-bottom:1px solid #999;padding:0 4px}
+.doc-end{margin:18px 0 0;padding-top:10px;border-top:1px dashed #ccc;color:#6B676B;font-size:12px;text-align:center}
+.sign-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.sign-grid input[readonly]{background:var(--chip)}
+.sign-box{border:1.5px solid var(--line);border-radius:16px;padding:14px}
+.sign-tabs{display:inline-flex;gap:4px;background:var(--chip);padding:4px;border-radius:999px;margin-bottom:10px}
+.sign-tabs button{border:0;background:none;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink-2)}
+.sign-tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.sign-pad{position:relative;height:120px;border-radius:12px;background:#fff;border:1.5px dashed #D9D5D7;display:grid;place-items:center;overflow:hidden}
+.sign-pad canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.typed{font-family:'Caveat','Brush Script MT',cursive;font-size:46px;color:#141214;line-height:1}
+.clear{position:absolute;right:8px;top:8px;border:1px solid #E6E3E4;background:#fff;color:#3D3A3D;border-radius:999px;padding:4px 10px;font-size:12px;cursor:pointer}
+.sign-line{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.signed-note{border-radius:14px;background:var(--chip);padding:14px 16px;font-size:13px;color:var(--ink-2);display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.signed-note .mini{font-family:'Caveat','Brush Script MT',cursive;font-size:30px;color:var(--ink);line-height:1}
+.signed-note img{height:40px;background:#fff;border-radius:6px}
+@media (max-width:860px){.sign-grid{grid-template-columns:1fr}}
+
+/* TECH */
+.hub{display:flex;flex-direction:column;align-items:center}
+.hub-core{background:var(--ink);color:var(--ground);border-radius:18px;padding:18px 26px;text-align:center;max-width:520px;width:100%}
+.hub-core b{display:block;font-size:20px;letter-spacing:-.01em}
+.hub-core span{font-size:13px;opacity:.8}
+.hub-stem{width:2px;height:26px;background:var(--line)}
+.bricks{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;width:100%;padding-top:26px}
+.bricks::before{content:"";position:absolute;top:0;left:calc(100%/12);right:calc(100%/12);height:2px;background:var(--line)}
+.brick{position:relative;background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:16px 14px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:6px;transition:all .2s}
+.brick::before{content:"";position:absolute;top:-28px;left:50%;width:2px;height:26px;background:var(--line)}
+.brick:hover{border-color:var(--red);transform:translateY(-2px)}
+.brick[aria-pressed="true"]{border-color:var(--red);box-shadow:0 0 0 4px color-mix(in srgb,var(--red) 15%,transparent)}
+.brick[aria-pressed="true"]::before{background:var(--red)}
+.brick small{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}
+.brick b{font-size:16px}
+.brick span{font-size:12px;color:var(--muted)}
+.tech-detail{margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.tech-detail .col .chips{display:flex;flex-wrap:wrap;gap:6px}
+.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:var(--chip);border-radius:6px;padding:2px 7px;color:var(--ink)}
+.events{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:24px 26px}
+.events h3{font-size:20px;font-weight:700;margin-bottom:14px}
+.ev{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.ev:last-child{border-bottom:0}
+.ev .t{font-weight:600;color:var(--red);font-size:13px}
+.ev .who{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.ev .who button{border:1px solid var(--line);background:var(--chip);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:600;cursor:pointer;color:var(--ink-2)}
+.ev .who button:hover{border-color:var(--red);color:var(--red)}
+.ev.hit{background:color-mix(in srgb,var(--red-soft) 50%,transparent)}
+.hipaa{margin-top:16px;border-radius:16px;background:var(--ink);color:var(--ground);padding:18px 22px;font-size:14px;display:flex;gap:14px;align-items:flex-start}
+.hipaa svg{width:22px;height:22px;flex-shrink:0;color:#FF3B55}
+@media (max-width:980px){.bricks{grid-template-columns:repeat(3,minmax(0,1fr))}.bricks::before,.brick::before{display:none}.tech-detail{grid-template-columns:1fr}.tech-detail .col{border-right:0;border-bottom:1px solid var(--line)}}
+@media (max-width:560px){.bricks{grid-template-columns:repeat(2,minmax(0,1fr))}.ev{grid-template-columns:1fr}.ev .who{justify-content:flex-start}}
 </style>
 </head>
 <body>
@@ -314,7 +390,7 @@ footer p{margin:0 0 8px;font-size:14px;opacity:.85}
     </div>
     <h1><span>Le parcours d'un cabinet,</span>de la signature à la restitution</h1>
     <p class="lead">Sept étapes, de l'inscription sur Cosmi3D au retour du matériel. Cliquez sur une étape pour voir qui fait quoi, et ce que dit le contrat.</p>
-    <a class="jump" href="#maquette">Voir la maquette du site Cosmi3D et des emails →</a>
+    <a class="jump" href="#maquette">Voir la maquette du site Cosmi3D et des emails →</a> <a class="jump" href="#tech" style="background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6)">Briques techniques →</a>
     <div class="figs">
       <div class="fig"><b>$1,000</b><span>minimum de travaux par mois</span></div>
       <div class="fig"><b>$400</b><span>frais d'activation non remboursables, payés à l'inscription</span></div>
@@ -371,20 +447,6 @@ footer p{margin:0 0 8px;font-size:14px;opacity:.85}
       <p>Les règles qui s'appliquent à tout moment. Ouvrez une carte pour le détail.</p>
     </div>
     <div class="acc" id="acc"></div>
-    <div class="warr">
-      <div>
-        <div class="eyebrow">Art. 7</div>
-        <h3 style="font-size:22px;font-weight:700;margin-top:6px">Garantie des produits de laboratoire</h3>
-        <div class="bars" id="bars"></div>
-        <div class="axis" style="margin-top:6px"><span></span><div><span>0</span><span>1 an</span><span>2</span><span>3</span><span>4</span><span>5 ans</span></div><span></span></div>
-      </div>
-      <ul>
-        <li>Défaut de matériau ou de fabrication : Cosmilab <strong>répare ou remplace</strong> sans frais, après retour et examen du dispositif.</li>
-        <li>Les autres coûts d'ajustement, de réparation et de remplacement restent à la charge du cabinet.</li>
-        <li>Pas de garantie d'adaptation à un usage particulier ; si la loi l'impose, garantie implicite limitée à 90 jours après livraison.</li>
-        <li><span class="hl">Garantie caduque</span> sans entretien et contrôle réguliers par un professionnel dentaire qualifié.</li>
-      </ul>
-    </div>
   </div>
 </section>
 
@@ -392,7 +454,7 @@ footer p{margin:0 0 8px;font-size:14px;opacity:.85}
   <div class="wrap">
     <div class="sec-head">
       <div><div class="eyebrow">Maquette Cosmi3D</div><h2>Ce que voit le dentiste</h2></div>
-      <p><span class="mock-note">Exemple · aucune donnée envoyée</span><br>Le parcours d'inscription en 5 écrans, puis les 3 emails automatiques. Les zones surlignées en jaune sont à compléter.</p>
+      <p><span class="mock-note">Exemple · aucune donnée envoyée</span><br>Le parcours d'inscription en 6 écrans, signature en ligne comprise, puis les 3 emails automatiques. Les zones surlignées en jaune sont à compléter.</p>
     </div>
     <div class="mtabs" role="tablist" aria-label="Maquette">
       <button type="button" role="tab" id="mt-site" aria-selected="true" aria-controls="mp-site">Inscription en ligne</button>
@@ -414,7 +476,8 @@ footer p{margin:0 0 8px;font-size:14px;opacity:.85}
             <button type="button" class="wstep" data-s="1"><b>2</b>Votre équipe</button>
             <button type="button" class="wstep" data-s="2"><b>3</b>Moyen de paiement</button>
             <button type="button" class="wstep" data-s="3"><b>4</b>Votre formation</button>
-            <button type="button" class="wstep" data-s="4"><b>5</b>Signature et activation</button>
+            <button type="button" class="wstep" data-s="4"><b>5</b>Signature du contrat</button>
+            <button type="button" class="wstep" data-s="5"><b>6</b>Paiement et activation</button>
             <div class="sum"><strong>$400</strong>Frais d'activation, non remboursables. Puis au moins $1,000 de travaux de laboratoire par mois.</div>
           </aside>
           <div class="wiz-main">
@@ -465,20 +528,90 @@ footer p{margin:0 0 8px;font-size:14px;opacity:.85}
                   <label><input type="radio" name="tr" value="Partenaire technique Cosmilab"><span>Partenaire technique Cosmilab<small><span class="ph">[nom du partenaire]</span></small></span></label>
                 </div>
               </div>
+              <div class="policy"><strong>Règle d'annulation.</strong> Sans réponse à l'email envoyé 2 jours avant, la formation est maintenue. Annulation ou report à moins de 24 h, ou absence : la séance est due et une nouvelle séance est facturée <strong>$400</strong>.</div>
             </div>
-            <!-- 5 -->
+            <!-- 5 : signature -->
             <div class="wpane" data-p="4" hidden>
-              <h3>Signature et activation</h3><p class="sub">Vérifiez le récapitulatif avant de signer.</p>
+              <h3>Signature du contrat</h3><p class="sub">Lisez le contrat jusqu'en bas, puis signez. Signature électronique <span class="ph">[DocuSign ou équivalent]</span>.</p>
+              <div class="doc-shell">
+                <div class="doc-bar"><span>Contrat de mise à disposition de scanner · texte intégral v9</span><span id="readPct">Lu à 0 %</span></div>
+                <div class="doc" id="doc" tabindex="0" aria-label="Contrat à lire">
+                  <div class="paper">
+                    <div class="paper-head"><b>COSMILAB US INC.</b><span>Contrat de mise à disposition de scanner et de services de laboratoire</span><small>1297 North Avenue, New Rochelle, NY 10804 · cosmilab.us · info@cosmilab.us · 914 901 3901</small></div>
+                    <p class="parties">Cabinet : <strong id="docPractice">[cabinet]</strong> · Signataire : <strong id="docName">[signataire]</strong></p>
+<h4 class="dh">Ce que Cosmilab fournit</h4>
+<p>En travaillant avec Cosmilab, vous recevez les éléments suivants sans facturation distincte :</p>
+<p><b>Scanner intra-oral. </b>Un scanner intra-oral <b>Medit i900</b>, configuré et prêt à l&#x27;emploi.</p>
+<p><b>Ordinateur. </b>Un ordinateur portable configuré pour la numérisation, à usage exclusif de Cosmi3D.</p>
+<p><b>Chariot. </b>Sur demande et sous réserve de disponibilité, un chariot mobile pour l&#x27;ordinateur et le scanner (frais de $300 par chariot, voir article 2).</p>
+<p><b>Logiciel. </b>L&#x27;accès à la plateforme Cosmi3D d&#x27;acquisition numérique et de commande.</p>
+<p><b>Formation. </b>La formation de l&#x27;ensemble de votre équipe clinique, dispensée soit par Medit USA, en présentiel ou à distance, soit par le partenaire technique de Cosmilab. La séance doit être réservée via le lien de réservation en ligne (Calendly) <b><span class="ph">[lien Calendly]</span></b> communiqué lors de votre inscription sur la plateforme Cosmi3D, avant l&#x27;expédition du Matériel ; Cosmilab n&#x27;expédie le Matériel qu&#x27;une fois la formation réservée et les Frais d&#x27;activation payés. Vous pouvez reprogrammer la séance via ce même lien. Sans réponse de votre part à l&#x27;email de confirmation envoyé deux (2) jours avant, la formation est maintenue à la date prévue. Toute annulation ou tout report doit être notifié au moins <b>vingt-quatre (24) heures</b> avant la séance ; à défaut, la séance est due et toute nouvelle séance est facturée <b>$400.00</b> (voir article 10).</p>
+<p><b>Assistance. </b>L&#x27;assistance technique et la maintenance logicielle du matériel pendant toute la durée du présent contrat.</p>
+<h4 class="dh">Vos engagements de partenariat</h4>
+<table class="dt"><tr><th>Votre engagement</th><th>Détail</th></tr><tr><td>Engagement de commande initial</td><td>Au moins $1,000.00 de travaux de laboratoire sur la période initiale de 1 mois</td></tr><tr><td>Minimum requis par période</td><td>Au moins $1,000.00 de travaux de laboratoire par période de 1 mois ensuite</td></tr><tr><td>Payer selon les conditions convenues</td><td>Voir la grille tarifaire Cosmilab reproduite en Annexe A</td></tr><tr><td>Payer par voie électronique</td><td>Carte bancaire ou prélèvement ACH uniquement</td></tr><tr><td>Suivre la formation</td><td>Toute personne du cabinet qui numérise doit suivre la formation</td></tr><tr><td>Communiquer vos préférences</td><td>Nous faire des retours actifs sur vos préférences d&#x27;ajustement et d&#x27;esthétique, afin d&#x27;offrir la meilleure expérience possible au patient</td></tr></table>
+<h4 class="dh">Conditions contractuelles</h4>
+<p>Le présent contrat de mise à disposition de scanner et de services de laboratoire (le « Contrat ») est conclu entre COSMILAB US INC. (« Cosmilab » ou « nous ») et vous ainsi que votre cabinet dentaire tel qu&#x27;identifié sur la page de signature ci-après (« Vous »). Si vous concluez le présent Contrat pour le compte d&#x27;une entité, d&#x27;une société de personnes, d&#x27;une société ou d&#x27;une organisation, « Vous » désigne vous-même, cette entité et l&#x27;ensemble de ses utilisateurs, et vous déclarez disposer du pouvoir d&#x27;engager l&#x27;ensemble de ces utilisateurs. Les parties conviennent de ce qui suit :</p>
+<p><b>1. Facturation et paiements : </b>Le premier de chaque mois, Cosmilab émet une facture portant sur l&#x27;ensemble des commandes passées au cours du mois précédent. Vous disposez de sept (7) jours calendaires pour vérifier cette facture. Cosmilab prélève automatiquement le moyen de paiement que vous avez choisi le huitième (8e) jour de chaque mois. Nous acceptons le paiement par prélèvement ACH ou par carte bancaire, et vous êtes tenu de conserver en permanence un moyen de paiement valide enregistré. Cosmilab se réserve le droit d&#x27;appliquer à la carte bancaire enregistrée des frais de traitement pouvant aller jusqu&#x27;à 2,9 % du montant total de la transaction, sauf interdiction contraire de la loi applicable. Cosmilab n&#x27;accepte pas les chèques papier, les cartes prépayées, les paiements de particulier à particulier ni les crypto-monnaies comme moyens de paiement valides. En cas d&#x27;impayés depuis soixante (60) jours ou plus, ou si le montant dû à Cosmilab atteint $10,000 (USD) ou plus, Cosmilab se réserve le droit de suspendre votre compte jusqu&#x27;au règlement intégral. Vous reconnaissez que Cosmilab vous a informé de l&#x27;existence possible de frais de traitement et vous a donné l&#x27;occasion de poser toute question à ce sujet avant la conclusion du présent Contrat.</p>
+<p><b>2. Frais : </b>Cosmilab vous facture des frais uniques de $400.00 (les « Frais d&#x27;activation ») lors de votre inscription sur la plateforme Cosmi3D, avant l&#x27;expédition du Matériel ; Cosmilab n&#x27;expédie le Matériel qu&#x27;après leur paiement. Les Frais d&#x27;activation ne sont pas remboursables, y compris en cas d&#x27;annulation ou de résiliation avant l&#x27;expédition du Matériel. Toute nouvelle séance de formation rendue nécessaire dans les conditions de l&#x27;article 10 est facturée <b>$400.00</b> (les « Frais de nouvelle formation »), non remboursables et non imputables sur votre Minimum requis. Les Frais d&#x27;activation ne peuvent s&#x27;imputer ni sur votre Solde de période initiale ni sur votre Solde de période de renouvellement. Si vous demandez un chariot mobile, Cosmilab vous facture des frais uniques et non remboursables de $300.00 par chariot.</p>
+<p><b>3. Durée : </b>Le présent Contrat prend effet à la date de votre signature (la « Date d&#x27;effet ») et se poursuit pour une période initiale de 1 mois, sauf résiliation anticipée conformément aux stipulations du présent Contrat ou à la loi applicable (la « Période initiale »). À l&#x27;expiration de la Période initiale, le Contrat est automatiquement reconduit par périodes successives de 1 mois (chacune une « Période de renouvellement », et avec la Période initiale, la « Durée »), jusqu&#x27;à résiliation conformément aux stipulations du présent Contrat ou à la loi applicable.</p>
+<p><b>4. Minimum requis de travaux de laboratoire : </b>Vous vous engagez à commander au moins $1,000.00 (USD) de travaux de laboratoire auprès de Cosmilab pendant votre Période initiale (votre « Engagement de commande initial »). Vous vous engagez à commander au moins $1,000.00 (USD) de travaux de laboratoire auprès de Cosmilab pendant chaque Période de renouvellement tant que le présent Contrat demeure en vigueur (votre « Minimum requis »).</p>
+<p>Si, pendant la Période initiale, la valeur totale de vos commandes n&#x27;atteint pas votre Engagement de commande initial, Cosmilab vous facture la différence entre le montant total de vos commandes et votre Engagement de commande initial à la fin de la Période initiale (votre « Solde de période initiale »). Par la suite, Cosmilab vous facture la différence entre le montant total de vos commandes et votre Minimum requis à l&#x27;issue de chaque Période de renouvellement (votre « Solde de période de renouvellement »).</p>
+<p>Il est expressément convenu que tout Solde de période initiale ou Solde de période de renouvellement facturé au titre du présent article constitue la contrepartie du matériel et des services fournis en vertu du présent Contrat, n&#x27;est pas remboursable, et ne constitue ni un avoir, ni un acompte, ni un paiement d&#x27;avance imputable sur des commandes futures.</p>
+<p><b>5. Matériel : </b>Cosmilab s&#x27;engage à vous fournir un scanner intra-oral, un ordinateur portable, un chariot (sous réserve de disponibilité), ainsi que l&#x27;accès à sa plateforme de commande et aux autres fournitures nécessaires (le « Matériel »), en contrepartie de votre engagement à atteindre le Minimum requis pendant toute la durée du Contrat. Pour le calcul de la taxe sur les ventes, $100 de votre Minimum requis sont affectés au Matériel (étant précisé que cela ne modifie en rien votre Minimum requis de travaux de laboratoire). Le Matériel que Cosmilab met à votre disposition demeure la propriété de Cosmilab ; vous ne pourrez ni modifier, ni endommager, ni détruire le Matériel de quelque manière que ce soit, ni le sortir de votre cabinet. Cosmilab vous fournit également l&#x27;assistance, le service technique et la maintenance logicielle du Matériel. Vous vous engagez à entretenir correctement le Matériel au quotidien, notamment à le nettoyer et à le ranger en sécurité. Vous êtes responsable du Matériel tant qu&#x27;il est en votre possession et vous en assumez le risque de perte. En cas de dommage partiel au Matériel résultant d&#x27;une erreur d&#x27;utilisation, y compris une installation incorrecte, un mésusage ou un usage abusif, Cosmilab pourra vous facturer, sans plafond, le coût réel de réparation ou de remplacement des éléments endommagés, pièces, main-d&#x27;œuvre et frais d&#x27;expédition compris (les « Frais de pièces de remplacement »). Vous autorisez expressément Cosmilab à prélever les Frais de pièces de remplacement sur le moyen de paiement enregistré à votre compte (carte bancaire ou prélèvement ACH), après vous avoir adressé la facture correspondante accompagnée du justificatif du coût réel. Vous vous engagez à acheter les embouts de scanner auprès de Cosmilab ou d&#x27;un revendeur Medit agréé, et à n&#x27;utiliser avec le Matériel que des embouts approuvés par Medit.</p>
+<p><b>6. Prérequis informatiques : </b>Vous vous engagez à fournir et à maintenir une connexion internet haut débit pour l&#x27;utilisation du Matériel, et à respecter la Politique informatique figurant dans les conditions générales en ligne.</p>
+<p><b>7. Garantie Cosmilab : </b>Cosmilab garantit que tous les dispositifs dentaires sont fabriqués conformément aux spécifications cliniques fournies et aux spécifications des fabricants. Si un dispositif présente une défaillance due à un défaut de matériau ou de fabrication, Cosmilab le réparera ou le remplacera sans frais de matériaux ni de main-d&#x27;œuvre, sous réserve du retour du dispositif et de son examen par Cosmilab. Les durées de garantie sont les suivantes :<br>•  restaurations fixes : 5 ans, à l&#x27;exception des inlays/onlays : 3 ans, et des couronnes provisoires : aucune garantie ;<br>•  restaurations amovibles : 3 ans ;<br>•  piliers sur mesure (fabriqués par Cosmilab) : 5 ans ;<br>•  gouttières et protections : 6 mois.<br>Tous les autres coûts liés à l&#x27;ajustement, à la réparation et au remplacement des dispositifs restent à votre charge. Cosmilab ne garantit pas que les dispositifs soient adaptés à un usage particulier ; si une telle exclusion n&#x27;est pas permise par la loi, la durée de toute garantie implicite est limitée à 90 jours à compter de la livraison.<br>La garantie est caduque si la restauration n&#x27;est pas entretenue et contrôlée régulièrement par un professionnel dentaire qualifié.</p>
+<p><b>8. Exclusivité : </b>Vous vous engagez à n&#x27;utiliser notre Matériel que pour commander des Produits Cosmilab (tels que définis ci-après) via la plateforme de commande Cosmilab, et à ne pas utiliser le Matériel pour réaliser des numérisations et/ou adresser des commandes à d&#x27;autres laboratoires. Sont désignés « Produits Cosmilab » l&#x27;ensemble des produits et services de laboratoire proposés par Cosmilab et commandés via sa plateforme de commande. Le présent Contrat ne vous interdit pas d&#x27;adresser des empreintes physiques à d&#x27;autres laboratoires, ni de commander d&#x27;autres produits en utilisant un matériel autre que celui de Cosmilab.</p>
+<p><b>9. Résiliation et restitution du matériel : </b>Vous comme Cosmilab pouvez résilier le présent Contrat à tout moment, sous réserve d&#x27;un préavis écrit de dix (10) jours adressé à l&#x27;autre partie. En cas de résiliation, vous êtes tenu de restituer l&#x27;intégralité du Matériel fourni par Cosmilab. Cosmilab vous fournit gratuitement les étiquettes d&#x27;expédition et un carton pour le retour. Si vous n&#x27;engagez pas la restitution du Matériel en programmant un enlèvement par le transporteur dans les trente (30) jours suivant la réception d&#x27;une étiquette de retour, Cosmilab pourra vous facturer la valeur de détail intégrale du Matériel (jusqu&#x27;à $30,000), et ce à tout moment jusqu&#x27;à réception effective du Matériel restitué. Vous autorisez expressément Cosmilab à prélever ce montant sur le moyen de paiement enregistré à votre compte (carte bancaire ou prélèvement ACH) ; si le prélèvement est refusé ou n&#x27;est que partiel, le solde reste immédiatement exigible. Si le Matériel est restitué en bon état dans les <b>soixante (60)</b> jours suivant le prélèvement, Cosmilab vous rembourse le montant prélevé, déduction faite des éventuels Frais de pièces de remplacement et des frais engagés. En cas de résiliation, vous restez tenu de payer toutes les commandes en cours passées auprès de Cosmilab, et vous restez redevable du Minimum requis du mois calendaire concerné.</p>
+<p><b>10. Formation : </b>Vous-même ainsi que toute personne de votre cabinet appelée à utiliser la plateforme de commande Cosmilab — laquelle comprend les services et l&#x27;assistance numériques, le matériel et/ou les logiciels, ainsi que les Produits Cosmilab fixes et amovibles (ensemble, les « Offres Cosmilab ») — devrez suivre une formation Cosmilab avant d&#x27;utiliser les Offres Cosmilab ou d&#x27;en discuter avec des patients. La formation est dispensée soit par Medit USA, en présentiel ou à distance, soit par le partenaire technique de Cosmilab ; elle doit être réservée via le lien de réservation en ligne (Calendly) préalablement à l&#x27;expédition du Matériel, et peut être reprogrammée via ce même lien. Deux (2) jours avant la séance, Cosmilab vous adresse un email de confirmation ; à défaut de réponse, la formation est maintenue à la date et à l&#x27;heure prévues. Toute annulation ou demande de report doit être notifiée via le lien de réservation au moins <b>vingt-quatre (24) heures</b> avant l&#x27;heure prévue. Si la formation n&#x27;a pas lieu du fait de votre cabinet, ou si l&#x27;annulation ou le report est notifié moins de vingt-quatre (24) heures à l&#x27;avance, la séance est réputée effectuée et toute nouvelle séance vous est facturée <b>$400.00</b> (Frais de nouvelle formation, article 2). Vous autorisez expressément Cosmilab à prélever ces frais sur le moyen de paiement enregistré à votre compte.</p>
+<p><b>11. Changement de contrôle du cabinet : </b>Si votre cabinet dentaire fait l&#x27;objet d&#x27;un changement de contrôle capitalistique, vous vous engagez à en informer Cosmilab par écrit dans un délai de cinq (5) jours ouvrés à compter de ce changement.</p>
+<p><b>12. Avertissement médical : </b>Votre cabinet est seul responsable du traitement des patients recourant aux Offres Cosmilab, ainsi que de la communication à vos patients de toute information utile sur les Offres Cosmilab et sur les risques associés, avant et après le traitement. Les Offres Cosmilab sont proposées uniquement en complément de votre exercice et ne constituent ni un avis, ni un diagnostic, ni un traitement médical, dentaire ou de santé destiné à vos patients. Vous vous engagez à ne formuler aucune déclaration ni garantie relative aux Offres Cosmilab auprès de vos patients. Vous déclarez à Cosmilab que votre cabinet respectera l&#x27;ensemble des lois de l&#x27;État applicables aux professionnels autorisés à réaliser des numérisations intra-orales sur les patients du cabinet. Sauf stipulation contraire expresse des présentes, les Offres Cosmilab vous sont fournies « EN L&#x27;ÉTAT ».</p>
+<p><b>13. Conditions complémentaires : </b>Les conditions générales complémentaires, ainsi que l&#x27;Accord de sous-traitance HIPAA (Business Associate Agreement) et la Politique informatique de Cosmilab, sont consultables à l&#x27;adresse <b><span class="ph">[https://www.cosmilab.us/online-terms-and-conditions/]</span></b> et sont intégrés au présent Contrat par référence. Vous reconnaissez avoir eu la possibilité d&#x27;en prendre connaissance avant signature.</p>
+<h4 class="dh">Annexe A — Grille tarifaire</h4>
+<table class="dt"><tr><th>Produit</th><th>Prix</th></tr><tr class="grp"><td colspan="2">Restaurations fixes — couronnes, bridges, facettes, inlays et onlays</td></tr><tr><td>Zircone monolithique</td><td>$59</td></tr><tr><td>Zircone monolithique — sans modèle</td><td>$49</td></tr><tr><td>Zircone multicouche</td><td>$79</td></tr><tr><td>Zircone multicouche — sans modèle</td><td>$69</td></tr><tr><td>E.max stratifiée</td><td>$79</td></tr><tr><td>Céramo-zircone (PFZ)</td><td>$89</td></tr><tr><td>Céramo-métallique non précieux (PFM)</td><td>$49</td></tr><tr><td>Full métal non précieux</td><td>$49</td></tr><tr><td>Composite</td><td>$39</td></tr><tr><td>Provisoire</td><td>$19</td></tr><tr><td>Wax-up</td><td>$9</td></tr><tr class="grp"><td colspan="2">Implants — transvissés ou scellés</td></tr><tr><td>Couronne hybride (transvissée + scellée)</td><td>$129</td></tr><tr><td>Full zircone</td><td>$99</td></tr><tr><td>Céramo-zircone (PFZ)</td><td>$139</td></tr><tr><td>Céramo-métallique non précieux (PFM)</td><td>$99</td></tr><tr><td>Pilier sur mesure</td><td>$99</td></tr><tr><td>Composite</td><td>$89</td></tr><tr><td>Provisoire</td><td>$69</td></tr><tr><td>Modèle</td><td>$20</td></tr><tr class="grp"><td colspan="2">Amovible — prothèses partielles et complètes</td></tr><tr><td>Partielle flexible + montage des dents</td><td>$149</td></tr><tr><td>Complète flexible + montage des dents</td><td>$159</td></tr><tr><td>Partielle châssis métallique + montage des dents</td><td>$149</td></tr><tr><td>Partielle hybride : châssis métallique + flexible</td><td>$169</td></tr><tr><td>Partielle acrylique + montage des dents</td><td>$119</td></tr><tr><td>Complète acrylique + montage des dents</td><td>$129</td></tr><tr><td>Chaque essayage / montage, sur toute commande</td><td>$30</td></tr><tr><td>Porte-empreinte individuel</td><td>$19</td></tr><tr><td>Maquette d&#x27;occlusion en cire</td><td>$19</td></tr><tr class="grp"><td colspan="2">Gouttières et protections</td></tr><tr><td>Gouttière nocturne — tous matériaux et épaisseurs (dur/souple imprimé 3D, dur, souple, dur/souple, Astron)</td><td>$79</td></tr><tr><td>Gouttière de blanchiment — une arcade</td><td>$69</td></tr><tr><td>Gouttière de blanchiment — deux arcades</td><td>$119</td></tr><tr class="grp"><td colspan="2">Options et modifications</td></tr><tr><td>Joint céramique (butt margin), par couronne</td><td>$15</td></tr><tr><td>Appuis / couronne sous prothèse partielle</td><td>$15</td></tr><tr><td>Chape de réduction, par couronne</td><td>$15</td></tr><tr><td>Modèle : quadrant, une arcade</td><td>$15</td></tr><tr><td>Modèle : quadrant, deux arcades articulées</td><td>$25</td></tr><tr><td>Modèle : arcade complète, deux arcades articulées</td><td>$30</td></tr><tr><td>Céramique rose</td><td>$19</td></tr></table>
+<h4 class="dh">Signatures</h4>
+<p>En signant ci-dessous, je confirme avoir pris connaissance du contenu du présent document et l&#x27;accepter, y compris les conditions générales complémentaires, l&#x27;Accord de sous-traitance HIPAA et la Politique informatique intégrés par référence à l&#x27;article 13.</p>
+<p class="sigl">Nom et prénom : <span class="dfill" data-f="f-name">____________________</span></p>
+<p class="sigl">Fonction au sein du cabinet : <span class="dfill" data-f="f-role">____________________</span></p>
+<p class="sigl">Nom du cabinet : <span class="dfill" data-f="f-practice">____________________</span></p>
+<p class="sigl">Adresse du cabinet : <span class="dfill" data-f="f-addr">____________________</span></p>
+<p class="sigl">Email (utilisé pour toutes les notifications au titre du présent Contrat) : <span class="dfill" data-f="f-email">____________________</span></p>
+<p class="sigl">Date : <span class="dfill" data-f="date">____________________</span></p>
+<p class="sigl">Coordonnées de prélèvement ACH ou de carte bancaire : <span class="dfill" data-f="pm">____________________</span></p>
+<p>Ces informations seront enregistrées sur votre compte. Seuls les Frais d&#x27;activation de $400.00 sont prélevés à ce stade, lors de votre inscription.</p>
+<p class="sigl">COSMILAB US INC.</p>
+<p class="sigl">Signataire habilité : <span class="ph">[nom, fonction]</span></p>
+                    <p class="doc-end">Fin du contrat · version de travail française v9. La version anglaise signée fait foi.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="sign-grid">
+                <div class="field"><label for="sg-name">Nom du signataire</label><input id="sg-name" readonly></div>
+                <div class="field"><label for="sg-date">Date</label><input id="sg-date" readonly></div>
+              </div>
+              <div class="sign-box">
+                <div class="sign-tabs" role="tablist" aria-label="Mode de signature">
+                  <button type="button" role="tab" id="sgt-type" aria-selected="true">Taper</button>
+                  <button type="button" role="tab" id="sgt-draw" aria-selected="false">Dessiner</button>
+                </div>
+                <div id="sgp-type" class="sign-pad"><span class="typed" id="typed"></span></div>
+                <div id="sgp-draw" class="sign-pad" hidden><canvas id="pad" aria-label="Zone de signature, dessinez avec la souris ou le doigt"></canvas><button type="button" class="clear" id="clearPad">Effacer</button></div>
+                <div class="sign-line"><span>Signature</span><span id="signState" class="badge">Non signé</span></div>
+              </div>
+              <label class="check"><input type="checkbox" id="c1"> J'ai lu et j'accepte le contrat, ainsi que les conditions générales, l'accord HIPAA (BAA) et la politique informatique en ligne. Je reconnais que ma signature électronique a la même valeur qu'une signature manuscrite.</label>
+            </div>
+            <!-- 6 : paiement -->
+            <div class="wpane" data-p="5" hidden>
+              <h3>Paiement et activation</h3><p class="sub">Dernière étape : les frais d'activation.</p>
+              <div class="signed-note" id="signedNote"></div>
               <div class="recap" id="recap"></div>
-              <label class="check"><input type="checkbox" id="c1"> J'ai lu et j'accepte le contrat de mise à disposition de scanner, ainsi que les conditions générales, l'accord HIPAA (BAA) et la politique informatique en ligne.</label>
-              <label class="check"><input type="checkbox" id="c2"> J'autorise Cosmilab à prélever les $400 de frais d'activation, non remboursables, puis les factures mensuelles sur le moyen de paiement enregistré.</label>
+              <label class="check"><input type="checkbox" id="c2"> J'autorise Cosmilab à prélever maintenant les $400 de frais d'activation, non remboursables, puis les factures mensuelles et les frais prévus au contrat sur le moyen de paiement enregistré.</label>
             </div>
             <!-- done -->
-            <div class="wpane" data-p="5" hidden>
+            <div class="wpane" data-p="6" hidden>
               <div class="done-box">
                 <div class="big"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></div>
                 <h3>Bienvenue chez Cosmilab</h3>
-                <p style="margin:0;color:var(--ink-2)">Votre cabinet est maintenant <strong>client actif</strong>. Vous allez recevoir un email de confirmation avec le récapitulatif, votre formation et le suivi UPS de votre colis.</p>
+                <p style="margin:0;color:var(--ink-2)">Votre cabinet est maintenant <strong>client actif Cosmi3D</strong>. Vous allez recevoir un email de confirmation avec le contrat signé, votre formation et le suivi UPS de votre colis.</p>
                 <p class="hint">Maquette : rien n'a été signé ni prélevé.</p>
                 <button type="button" class="btn sec" id="seeMail">Voir l'email de confirmation</button>
               </div>
@@ -528,7 +661,8 @@ footer p{margin:0 0 8px;font-size:14px;opacity:.85}
                   <p><strong>Avant la formation</strong>, dès réception du colis :</p>
                   <ol><li>Déballez le scanner Medit i900 et l'ordinateur.</li><li>Branchez et chargez le matériel.</li><li>Suivez le tutoriel d'installation.</li></ol>
                   <div class="row-cta"><a class="cta" href="#maquette">Voir le tutoriel d'installation</a><a class="cta alt" href="#maquette">Suivre mon colis</a></div>
-                  <p style="font-size:13px;color:#6B676B">Votre contrat complet est joint à cet email. Liens du tutoriel et du suivi : <span class="ph">[à compléter]</span></p>
+                  <p style="font-size:14px"><strong>Règle d'annulation :</strong> sans réponse de votre part à notre email de J-2, la formation est maintenue. Annulation ou report à moins de 24 h, ou absence : la séance est due et une nouvelle séance est facturée $400.</p>
+                  <p style="font-size:13px;color:#6B676B">Votre contrat signé est joint à cet email. Liens du tutoriel et du suivi : <span class="ph">[à compléter]</span></p>
                 </div>
                 <div class="ef">COSMILAB US INC. · 1297 North Avenue, New Rochelle, NY 10804 · info@cosmilab.us · 914 901 3901</div>
               </div>
@@ -544,7 +678,8 @@ footer p{margin:0 0 8px;font-size:14px;opacity:.85}
                   <p>Votre formation est prévue le <span class="ph">[date et heure]</span> avec <span class="ph">[formateur]</span>. Pour qu'elle se passe bien, vérifiez ces trois points :</p>
                   <ul><li>Le colis est bien <strong>reçu</strong>.</li><li>Le scanner et l'ordinateur sont <strong>chargés et montés</strong>.</li><li>Toute l'équipe qui va scanner est <strong>disponible</strong> à l'heure prévue.</li></ul>
                   <div class="row-cta"><a class="cta" href="#maquette">Oui, tout est prêt</a><a class="cta alt" href="#maquette">Reprogrammer ma formation</a></div>
-                  <p style="font-size:13px;color:#6B676B">Un problème avec le colis ? Répondez à cet email ou appelez le 914 901 3901. Relance si pas de réponse : <span class="ph">[délai à définir]</span></p>
+                  <p style="font-size:14px;background:#FCE8EB;border-radius:10px;padding:12px 14px;color:#141214"><strong>Sans réponse de votre part, la formation est maintenue.</strong> Vous pouvez encore la reprogrammer jusqu'à 24 h avant. Passé ce délai, ou en cas d'absence, la séance est due et une nouvelle séance est facturée $400.</p>
+                  <p style="font-size:13px;color:#6B676B">Un problème avec le colis ? Répondez à cet email ou appelez le 914 901 3901.</p>
                 </div>
                 <div class="ef">COSMILAB US INC. · 1297 North Avenue, New Rochelle, NY 10804 · info@cosmilab.us · 914 901 3901</div>
               </div>
@@ -581,6 +716,26 @@ footer p{margin:0 0 8px;font-size:14px;opacity:.85}
     </div>
   </div>
 </section>
+
+<section id="tech">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">Pour l'équipe de développement</div><h2>Les briques techniques à relier</h2></div>
+      <p>Cosmi3D orchestre des services existants. Cliquez sur une brique pour voir son rôle, ses événements et ses alternatives. Choix à valider avec le développeur.</p>
+    </div>
+    <div class="hub">
+      <div class="hub-core"><b>Cosmi3D · site et back-end</b><span>Compte client, orchestration des webhooks, tâches planifiées (J-2, contrôle du minimum)</span></div>
+      <div class="hub-stem"></div>
+      <div class="bricks" id="bricks"></div>
+    </div>
+    <div class="tech-detail" id="techDetail" aria-live="polite"></div>
+    <div class="events">
+      <h3>Ce qui se passe techniquement, dans l'ordre</h3>
+      <div id="events"></div>
+    </div>
+    <div class="hipaa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5z"/></svg><div><strong>Données de santé (HIPAA).</strong> Les scans des patients sont des données de santé protégées : ils doivent rester sur une infrastructure couverte par un accord BAA. Aucune donnée patient ne doit passer par les outils d'inscription, de paiement, de planning ou d'emailing. Point à valider avec votre avocat et votre développeur.</div></div>
+  </div>
+</section>
 </main>
 
 <footer>
@@ -588,15 +743,16 @@ footer p{margin:0 0 8px;font-size:14px;opacity:.85}
     <div>
       <h3>Encore à compléter</h3>
       <ul>
-        <li>Lien Calendly, tutoriel d'installation, FAQ et délai de relance</li>
-        <li>Cosmi3D : URL du site, adresse d'envoi des emails, prestataire de paiement, horaires du support</li>
+        <li>Lien Calendly, tutoriel d'installation et FAQ</li>
+        <li>Cosmi3D : URL du site, adresse d'envoi des emails, horaires du support</li>
+        <li>Choix définitif des briques techniques (signature, paiement, planning, expédition, emails)</li>
         <li>Adresse définitive des conditions générales en ligne (cosmilab.us)</li>
         <li>Validation par un avocat américain : prêt du matériel, affectation des $100 à la taxe sur les ventes, exclusivité, prélèvements</li>
       </ul>
     </div>
     <div>
       <h3>Source</h3>
-      <p>Contrat scanner, version de travail française v8. Le contrat signé par les cabinets est la version anglaise : c'est elle qui fait foi.</p>
+      <p>Contrat scanner, version de travail française v9. Le contrat signé par les cabinets est la version anglaise : c'est elle qui fait foi.</p>
       <p><span id="mail">info@cosmilab.us</span><button class="copy" id="copyMail" type="button">Copier</button></p>
       <p>914 901 3901</p>
     </div>
@@ -609,8 +765,8 @@ const STEPS = [
  {when:"J0", lbl:"Inscription & signature", title:"Inscription et signature digitale", where:"Sur le site Cosmi3D", actor:"Le dentiste", arts:"Art. 2 · 3 · 10 · 13 · Signatures",
   cols:[["Le dentiste renseigne",["Ses coordonnées et celles du cabinet : nom, fonction, adresse, email de notification","Son <strong>équipe</strong> : toutes les personnes qui vont scanner","Son <strong>autorisation de prélèvement</strong> (carte ou ACH), dont Cosmi3D vérifie qu'elle fonctionne"]],
         ["Il valide",["Signe le contrat <strong>en ligne</strong> et reconnaît les conditions générales, le BAA HIPAA et la politique IT","Réserve sa <strong>formation</strong> via le lien Calendly","Paie les "+R("$400 de frais d'activation")]],
-        ["Règle",[R("Tant que les $400 ne sont pas payés, rien n'est expédié"),"Les $400 ne sont <strong>pas remboursables</strong>, même en cas d'annulation avant expédition","Ils ne comptent pas dans le minimum mensuel de $1,000"],1]]},
- {when:"Paiement reçu", lbl:"Client actif", title:"Le cabinet devient client actif", where:"Compte activé", actor:"Cosmi3D", arts:"Art. 3 · 4 · 5 · 8",
+        ["Règle",[R("Tant que les $400 ne sont pas payés, rien n'est expédié"),"Formation annulée ou reportée à moins de 24 h : "+R("nouvelle séance facturée $400"),"Les $400 ne sont <strong>pas remboursables</strong>, même en cas d'annulation avant expédition","Ils ne comptent pas dans le minimum mensuel de $1,000"],1]]},
+ {when:"Paiement reçu", lbl:"Client actif Cosmi3D", title:"Client actif Cosmi3D", where:"Compte activé", actor:"Cosmi3D", arts:"Art. 3 · 4 · 5 · 8",
   cols:[["Ce qui démarre",["Le contrat court par <strong>périodes d'1 mois</strong>, reconduites automatiquement","Minimum de "+R("$1,000")+" de travaux de laboratoire par période"]],
         ["Le matériel",["Reste la <strong>propriété de Cosmilab</strong> et ne quitte pas le cabinet","Le cabinet en a la garde, l'entretient et assume le risque de perte","Connexion <strong>internet haut débit</strong> obligatoire","Taxe sur les ventes : <strong>$100</strong> du minimum affectés au matériel"]],
         ["Exclusivité",["Le scanner sert <strong>uniquement</strong> aux commandes Cosmilab via Cosmi3D","Empreintes physiques vers d'autres labos : autorisées"]]]},
@@ -621,11 +777,11 @@ const STEPS = [
  {when:"J-2", lbl:"Relance avant formation", title:"Relance et vérification", where:"2 jours avant la formation", actor:"Cosmi3D", arts:"Art. 10",
   cols:[["Email de relance",["Le colis est-il bien <strong>reçu</strong> ?","Le matériel est-il <strong>chargé et monté</strong> ?","Tout est-il prêt pour la formation ?"]],
         ["Le client",["<strong>Confirme</strong> que tout est prêt","ou <strong>reprogramme</strong> sa formation via Calendly"]],
-        ["À définir",["Relance si le client ne répond pas [délai à définir]"],1]]},
- {when:"Jour J", lbl:"Formation & remerciement", title:"Formation et email de remerciement", where:"Formation, puis email", actor:"Formateur puis Cosmi3D", arts:"Art. 5 · 10",
+        ["Règle",["Pas de réponse : la formation est <strong>maintenue</strong> à la date prévue","Annulation ou report à <strong>moins de 24 h</strong>, ou formation non faite du fait du cabinet : séance due","Toute nouvelle séance : "+R("$400")+", prélevés sur le moyen de paiement"],1]]},
+ {when:"Jour J", lbl:"Formation & remerciement", title:"Formation et email de remerciement", where:"Formation, puis email", actor:"Formateur puis Cosmi3D", arts:"Art. 2 · 5 · 10",
   cols:[["La formation",["<strong>Toute personne qui scanne</strong> est formée avant d'utiliser le scanner","… et avant d'en parler aux patients"]],
         ["L'email de remerciement",["Merci d'avoir suivi la formation","Les <strong>coordonnées du support technique</strong>","Quelques questions fréquentes [FAQ à rédiger]"]],
-        ["Ensuite",["Support technique et <strong>maintenance logicielle</strong> inclus pendant tout le contrat"]]]},
+        ["Règle",["Formation non faite du fait du cabinet : séance réputée effectuée","Nouvelle séance : "+R("$400")+", non remboursables, hors minimum mensuel","Ensuite : support technique et <strong>maintenance logicielle</strong> inclus"],1]]},
  {when:"Chaque mois", lbl:"Cycle mensuel", title:"Le cycle mensuel de facturation", where:"Reconduction automatique", actor:"Cosmilab", arts:"Art. 1 · 3 · 4",
   cols:[["Le calendrier",["Le <strong>1er</strong> : facture des commandes du mois précédent","Du <strong>1er au 7</strong> : le cabinet vérifie sa facture","Le <strong>8</strong> : prélèvement automatique"]],
         ["Minimum",["Au moins "+R("$1,000")+" par période, dès le premier mois","Sinon, la différence est facturée et <strong>non remboursable</strong>"]],
@@ -642,7 +798,7 @@ STEPS.forEach((s,i)=>{
   const b=document.createElement('button');
   b.className='step'+(i<5?' onb':''); b.type='button'; b.id='tab-'+i;
   b.setAttribute('role','tab'); b.setAttribute('aria-controls','panel');
-  b.innerHTML=`<span class="dot">${i+1}</span><span class="when">${s.when}</span><span class="lbl">${s.lbl}</span>`;
+  b.innerHTML=`<span class="dot">${i+1}</span><span class="txt"><span class="when">${s.when}</span><span class="lbl">${s.lbl}</span></span>`;
   b.addEventListener('click',()=>go(i));
   b.addEventListener('keydown',e=>{
     if(e.key==='ArrowRight'){e.preventDefault();go(Math.min(cur+1,6),true)}
@@ -735,12 +891,6 @@ ACC.forEach(([ic,t,a,items],i)=>{
   acc.appendChild(it);
 });
 
-/* Warranty bars (scale 0-5 years) */
-const W=[["Restaurations fixes",5,"5 ans"],["Inlays / onlays",3,"3 ans"],["Couronnes provisoires",0,"Aucune"],["Restaurations amovibles",3,"3 ans"],["Piliers sur mesure (Cosmilab)",5,"5 ans"],["Gouttières et protections",0.5,"6 mois"]];
-const bars=document.getElementById('bars');
-W.forEach(([n,y,l])=>{const r=document.createElement('div');r.className='bar-row';r.innerHTML=`<span>${n}</span><div class="bar"><i data-w="${y/5*100}"></i></div><b>${l}</b>`;bars.appendChild(r);});
-requestAnimationFrame(()=>requestAnimationFrame(()=>bars.querySelectorAll('i').forEach(i=>i.style.width=i.dataset.w+'%')));
-
 /* copy */
 document.getElementById('copyMail').onclick=async e=>{
   const b=e.currentTarget;
@@ -799,29 +949,36 @@ document.getElementById('copyMail').onclick=async e=>{
     if(i===1){ const ok=[...team.querySelectorAll('input[id^="tm-n-"]')].some(x=>x.value.trim()); if(!ok) return 'Ajoutez au moins une personne qui va scanner.'; }
     if(i===2 && !verified) return 'Vérifiez le moyen de paiement avant de continuer.';
     if(i===3 && (!pickDate||!pickSlot)) return 'Choisissez une date et un horaire de formation.';
-    if(i===4 && !(document.getElementById('c1').checked && document.getElementById('c2').checked)) return 'Cochez les deux cases pour signer.';
+    if(i===4){ if(!window.__read) return 'Faites défiler le contrat jusqu\'en bas avant de signer.'; if(window.__signMode==='draw'&&!window.__drawn) return 'Dessinez votre signature, ou choisissez « Taper ».'; if(!document.getElementById('c1').checked) return 'Cochez la case d\'acceptation pour signer.'; }
+    if(i===5 && !document.getElementById('c2').checked) return 'Cochez l\'autorisation de prélèvement pour payer.';
     return '';
   }
   function recap(){
     const pm=document.querySelector('input[name="pm"]:checked').value==='ach'?'Prélèvement ACH':'Carte bancaire';
     const tr=document.querySelector('input[name="tr"]:checked').value;
     const n=[...team.querySelectorAll('input[id^="tm-n-"]')].filter(x=>x.value.trim()).length;
-    const rows=[['Cabinet',val('f-practice')],['Signataire',val('f-name')],['Équipe à former',n+' personne'+(n>1?'s':'')],['Moyen de paiement',pm+' · vérifié'],['Formation',pickDate+' à '+pickSlot],['Formateur',tr],['Minimum mensuel','$1,000 de travaux'],['À payer maintenant','$400 (non remboursables)']];
+    const rows=[['Cabinet',val('f-practice')],['Signataire',val('f-name')],['Équipe à former',n+' personne'+(n>1?'s':'')],['Moyen de paiement',pm+' · vérifié'],['Formation',pickDate+' à '+pickSlot],['Formateur',tr],['Minimum mensuel','$1,000 de travaux'],['Contrat','Signé électroniquement'],['À payer maintenant','$400 (non remboursables)']];
     document.getElementById('recap').innerHTML=rows.map(r=>`<div><span>${r[0]}</span><span>${r[1].replace(/[<>&]/g,'')}</span></div>`).join('');
   }
   function show(i){
     s=i; maxS=Math.max(maxS,i);
     panes.forEach(p=>p.hidden=+p.dataset.p!==i);
-    steps.forEach((b,j)=>{b.toggleAttribute('aria-current',j===i); if(j===i)b.setAttribute('aria-current','step'); b.classList.toggle('ok',j<i||i===5);});
-    err.textContent=''; actions.hidden=i===5; back.style.visibility=i===0?'hidden':'visible';
-    nextBtn.textContent=i===4?'Signer et payer $400':'Continuer';
-    if(i===4) recap();
+    steps.forEach((b,j)=>{b.removeAttribute('aria-current'); if(j===i)b.setAttribute('aria-current','step'); b.classList.toggle('ok',j<i||i===6);});
+    err.textContent=''; actions.hidden=i===6; back.style.visibility=i===0?'hidden':'visible';
+    nextBtn.textContent=i===4?'Signer le contrat':i===5?'Payer $400 et activer':'Continuer';
+    if(i===4){ document.getElementById('sg-name').value=val('f-name'); document.getElementById('sg-date').value=new Date().toLocaleDateString('fr-FR'); document.getElementById('typed').textContent=val('f-name'); document.getElementById('docPractice').textContent=val('f-practice'); document.getElementById('docName').textContent=val('f-name'); document.querySelectorAll('.paper .dfill').forEach(el=>{const f=el.dataset.f; el.textContent=f==='date'?new Date().toLocaleDateString('fr-FR'):f==='pm'?(document.querySelector('input[name="pm"]:checked').value==='ach'?'Prélèvement ACH, vérifié':'Carte bancaire, vérifiée'):(document.getElementById(f).value||'—');}); window.__read=false; const dd=document.getElementById('doc'); dd.scrollTop=0; document.getElementById('readPct').textContent='Lu à 0 %'; }
+    if(i===5) recap();
   }
   document.getElementById('wiz').addEventListener('submit',e=>{
-    e.preventDefault(); const m=check(s); if(m){err.textContent=m;return;} show(s+1);
+    e.preventDefault(); const m=check(s); if(m){err.textContent=m;return;}
+    if(s===4){ const st=document.getElementById('signState'); st.className='badge ok'; st.textContent='Signé (exemple)';
+      const img=window.__sigImage(); const note=document.getElementById('signedNote'); const when=new Date().toLocaleString('fr-FR');
+      note.innerHTML=(img?'<img alt="Signature dessinée" src="'+img+'">':'<span class="mini"></span>')+'<span>Contrat signé le '+when+' · certificat <span class="code">EXEMPLE-'+Math.random().toString(36).slice(2,8).toUpperCase()+'</span></span>';
+      const mini=note.querySelector('.mini'); if(mini) mini.textContent=val('f-name'); }
+    show(s+1);
   });
   back.onclick=()=>show(Math.max(0,s-1));
-  steps.forEach((b,j)=>b.onclick=()=>{ if(j<=maxS && s!==5) show(j); });
+  steps.forEach((b,j)=>b.onclick=()=>{ if(j<=maxS && s!==6) show(j); });
   document.getElementById('seeMail').onclick=()=>{showTab('mt-mail');pickMail(0);document.getElementById('mp-mail').scrollIntoView({behavior:'smooth',block:'start'});};
   show(0);
 
@@ -830,6 +987,82 @@ document.getElementById('copyMail').onclick=async e=>{
   function pickMail(i){inbox.forEach((b,j)=>b.setAttribute('aria-selected',j===i));mails.forEach((m,j)=>m.hidden=j!==i);}
   inbox.forEach((b,i)=>b.onclick=()=>pickMail(i));
   document.querySelectorAll('.email a.cta').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
+})();
+
+/* ===== Signature électronique (maquette) ===== */
+(function(){
+  const doc=document.getElementById('doc'), pct=document.getElementById('readPct');
+  window.__read=false;
+  function upd(){const max=doc.scrollHeight-doc.clientHeight;const v=max<=0?100:Math.min(100,Math.round(doc.scrollTop/max*100));pct.textContent=v>=98?'Lu en entier':'Lu à '+v+' %';if(v>=98)window.__read=true;}
+  doc.addEventListener('scroll',upd);
+  const tType=document.getElementById('sgt-type'), tDraw=document.getElementById('sgt-draw'), pType=document.getElementById('sgp-type'), pDraw=document.getElementById('sgp-draw');
+  window.__signMode='type'; window.__drawn=false;
+  function mode(m){window.__signMode=m;tType.setAttribute('aria-selected',m==='type');tDraw.setAttribute('aria-selected',m==='draw');pType.hidden=m!=='type';pDraw.hidden=m!=='draw';if(m==='draw')size();}
+  tType.onclick=()=>mode('type'); tDraw.onclick=()=>mode('draw');
+  const pad=document.getElementById('pad'), ctx=pad.getContext('2d'); let drawing=false,last=null;
+  function size(){const r=pad.getBoundingClientRect(),d=window.devicePixelRatio||1;if(!r.width)return;pad.width=r.width*d;pad.height=r.height*d;ctx.setTransform(d,0,0,d,0,0);ctx.lineWidth=2.4;ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#141214';window.__drawn=false;}
+  const pos=e=>{const r=pad.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};};
+  pad.addEventListener('pointerdown',e=>{drawing=true;last=pos(e);pad.setPointerCapture(e.pointerId);});
+  pad.addEventListener('pointermove',e=>{if(!drawing)return;const p=pos(e);ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.stroke();last=p;window.__drawn=true;});
+  ['pointerup','pointercancel','pointerleave'].forEach(t=>pad.addEventListener(t,()=>drawing=false));
+  document.getElementById('clearPad').onclick=()=>{ctx.clearRect(0,0,pad.width,pad.height);window.__drawn=false;};
+  window.__sigImage=()=>window.__signMode==='draw'&&window.__drawn?pad.toDataURL('image/png'):null;
+})();
+
+/* ===== Briques techniques ===== */
+(function(){
+  const T=[
+   {id:'sign',cat:'Signature',name:'DocuSign',tag:'Contrat signé en ligne',steps:'Étape 1',
+    role:['Signature <strong>intégrée</strong> au site (embedded signing) : le dentiste signe sans quitter Cosmi3D','Certificat d\'audit horodaté conservé avec le contrat','Contrat pré-rempli avec les données du formulaire'],
+    ev:['<span class="code">envelope-completed</span> (DocuSign Connect) : contrat signé, on passe au paiement'],
+    alt:['Dropbox Sign','PandaDoc','Yousign']},
+   {id:'pay',cat:'Paiement',name:'Stripe',tag:'ACH, carte, factures',steps:'Étapes 1, 6, 7',
+    role:['<strong>Vérification instantanée</strong> du compte bancaire ACH (Financial Connections)','Enregistrement du moyen de paiement puis encaissement des <strong>$400</strong>','Facture le 1er et prélèvement le 8 (Stripe Invoicing)','Prélèvements ponctuels : nouvelle formation, dommages, non-restitution'],
+    ev:['<span class="code">setup_intent.succeeded</span> : moyen de paiement vérifié','<span class="code">payment_intent.succeeded</span> : $400 reçus, client actif','<span class="code">invoice.payment_failed</span> : impayé, alerte'],
+    alt:['GoCardless (ACH)','Authorize.net']},
+   {id:'cal',cat:'Planning',name:'Calendly',tag:'Réservation de la formation',steps:'Étapes 1, 4, 5',
+    role:['Réservation intégrée au parcours d\'inscription','Liens de reprogrammation et d\'annulation dans chaque email','Le back-end compare l\'heure d\'annulation à l\'heure de la séance : moins de 24 h, prélèvement de $400','Absence marquée par le formateur (no-show)'],
+    ev:['<span class="code">invitee.created</span> : formation réservée','<span class="code">invitee.canceled</span> : annulation ou report, contrôle des 24 h'],
+    alt:['Cal.com','Agenda maison dans Cosmi3D']},
+   {id:'ship',cat:'Expédition',name:'Shippo',tag:'Étiquettes et suivi UPS',steps:'Étapes 3, 7',
+    role:['Création de l\'étiquette UPS dès le paiement reçu','Numéro de suivi inséré dans l\'email de confirmation','Étiquette de retour générée à la résiliation'],
+    ev:['<span class="code">track_updated</span> : colis livré, on peut envoyer le rappel d\'installation'],
+    alt:['EasyPost','API UPS en direct']},
+   {id:'mail',cat:'Emails',name:'Customer.io',tag:'Séquences automatiques',steps:'Étapes 3, 4, 5',
+    role:['Email de confirmation, relance J-2, remerciement','Envoi déclenché par les événements des autres briques','Modèles aux couleurs Cosmilab'],
+    ev:['Déclenché par <span class="code">payment_intent.succeeded</span>, la date Calendly (J-2) et la fin de formation'],
+    alt:['Postmark (transactionnel pur)','SendGrid','HubSpot']},
+   {id:'crm',cat:'CRM',name:'HubSpot',tag:'Suivi commercial',steps:'Étapes 2, 6',
+    role:['Fiche cabinet et statut « client actif Cosmi3D »','Suivi du minimum mensuel de $1,000 et alertes','Historique : signature, paiements, formation, tickets support'],
+    ev:['Mise à jour par le back-end à chaque événement clé'],
+    alt:['Pipedrive','Salesforce']}
+  ];
+  const EV=[
+   ['Inscription','Le moyen de paiement est vérifié',['pay']],
+   ['Signature','Le contrat est signé et archivé',['sign']],
+   ['Paiement $400','Le cabinet devient client actif Cosmi3D',['pay','crm']],
+   ['Réservation','La date de formation est enregistrée',['cal']],
+   ['Expédition','Étiquette UPS créée, email de confirmation envoyé',['ship','mail']],
+   ['J-2','Email de relance ; sans réponse, la formation est maintenue',['mail','cal']],
+   ['Annulation < 24 h','Nouvelle séance : $400 prélevés, email envoyé',['cal','pay','mail']],
+   ['Après formation','Email de remerciement avec support et FAQ',['mail']],
+   ['Chaque mois','Facture le 1er, prélèvement le 8, contrôle du minimum',['pay','crm']],
+   ['Résiliation','Étiquette de retour ; à défaut, prélèvement jusqu\'à $30,000',['ship','pay']]
+  ];
+  const bricks=document.getElementById('bricks'), det=document.getElementById('techDetail'), evBox=document.getElementById('events');
+  const btns={};
+  T.forEach(t=>{const b=document.createElement('button');b.type='button';b.className='brick';b.innerHTML=`<small>${t.cat}</small><b>${t.name}</b><span>${t.tag}</span>`;b.onclick=()=>pick(t.id);bricks.appendChild(b);btns[t.id]=b;});
+  EV.forEach(([when,what,ids])=>{const r=document.createElement('div');r.className='ev';r.dataset.ids=ids.join(' ');r.innerHTML=`<span class="t">${when}</span><span>${what}</span><span class="who">${ids.map(i=>`<button type="button" data-id="${i}">${T.find(t=>t.id===i).name}</button>`).join('')}</span>`;evBox.appendChild(r);});
+  evBox.addEventListener('click',e=>{const b=e.target.closest('button[data-id]');if(b){pick(b.dataset.id);document.getElementById('bricks').scrollIntoView({behavior:'smooth',block:'center'});}});
+  function pick(id){
+    const t=T.find(x=>x.id===id);
+    Object.entries(btns).forEach(([k,b])=>b.setAttribute('aria-pressed',k===id));
+    evBox.querySelectorAll('.ev').forEach(r=>r.classList.toggle('hit',r.dataset.ids.split(' ').includes(id)));
+    det.innerHTML=`<div class="col"><h4>${t.cat} · ${t.name} · ${t.steps}</h4><ul>${t.role.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      <div class="col"><h4>Événements (webhooks)</h4><ul>${t.ev.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      <div class="col rule"><h4>Alternatives</h4><ul>${t.alt.map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
+  }
+  pick('pay');
 })();
 </script>
 
