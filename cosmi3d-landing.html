@@ -366,6 +366,92 @@ footer .legal{border-color:rgba(255,255,255,.15);color:#E4E4E0}
 .links .btn{white-space:nowrap}
 .receipt .sig .mini{white-space:nowrap}
 @media (max-width:600px){.brand .p3d{display:none}.brand img{height:26px}.links .btn{padding:10px 14px;font-size:13px}}
+
+/* === v2 === */
+.h2{font-size:clamp(30px,5.4vw,74px)}
+.stage{aspect-ratio:1000/560;background:var(--soft)}
+.stage .arch{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.tooth-g path.body{transition:fill .35s,stroke .35s}
+.tooth-g.done path.body{fill:#D90F2C;stroke:#B00B23}
+.tooth-g.done path.mesh{stroke:#FFFFFF;opacity:.55}
+.tooth-g.pop{animation:tpop .45s cubic-bezier(.2,1.6,.3,1)}
+@keyframes tpop{0%{transform:scale(1)}40%{transform:scale(1.12)}100%{transform:scale(1)}}
+#wand .sweep{animation:sw .6s ease-in-out infinite alternate}
+@keyframes sw{from{transform:translateX(0)}to{transform:translateX(14px)}}
+.hud{position:absolute;background:#fff;border-radius:18px;padding:12px 16px;box-shadow:0 14px 40px -18px rgba(11,11,12,.35);display:flex;align-items:center;gap:12px;font-size:13px}
+.hud small{display:block;color:var(--mid);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.hud b{font-size:22px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.hud-l{left:3%;top:6%}.hud-r{right:3%;top:6%;min-width:180px;flex-direction:column;align-items:stretch;gap:8px}
+.hud-b{left:50%;bottom:5%;transform:translate(-50%,20px);opacity:0;background:var(--red);color:#fff;font-weight:600;transition:all .5s cubic-bezier(.2,.8,.2,1);white-space:nowrap}
+.hud-b.on{transform:translate(-50%,0);opacity:1}
+.hud-b svg{width:18px;height:18px}
+.dotlive{width:10px;height:10px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(217,15,44,.6);animation:live 1.4s infinite}
+@keyframes live{to{box-shadow:0 0 0 12px rgba(217,15,44,0)}}
+.pbar{height:6px;border-radius:6px;background:var(--line);overflow:hidden}.pbar i{display:block;height:100%;width:0;background:var(--red);border-radius:6px}
+@media (max-width:700px){.stage{aspect-ratio:4/3.1}.hud{padding:8px 11px;border-radius:14px}.hud b{font-size:16px}.hud-r{min-width:120px}.hud-b{font-size:11px;padding:8px 12px}}
+/* feature card */
+.card.feature{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:center}
+.card.feature .ftxt{display:flex;flex-direction:column;gap:14px}
+.card.feature .fart svg{width:100%;height:auto;display:block}
+@media (max-width:980px){.card.feature{grid-template-columns:1fr}.card.feature .fart{max-width:360px;margin-inline:auto;width:100%}}
+.card h3{font-size:clamp(22px,2.2vw,26px)}
+.card{min-height:0}
+.bento{grid-auto-flow:dense}
+@media (max-width:980px){.card{padding:28px}}
+@media (max-width:600px){.bento{grid-template-columns:1fr}.card.s2,.card.s3,.card.s4{grid-column:auto}}
+/* proof */
+.proof-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;background:none;border-radius:0;overflow:visible}
+.pf,.pf:nth-child(1),.pf:nth-child(3){background:#fff;color:var(--black);border-radius:28px;padding:32px 28px;min-height:0;gap:10px}
+.pf b{font-size:clamp(46px,5vw,76px);color:var(--red);display:flex;align-items:baseline;gap:4px}
+.pf b .u,.pf:nth-child(1) b .u,.pf:nth-child(3) b .u{color:var(--red);font-size:.42em;letter-spacing:-.02em}
+.pf h4{margin:6px 0 0;font-size:18px;letter-spacing:-.01em}
+.pf .d{color:var(--grey);font-size:14px;line-height:1.5}
+.proof .strip{margin-top:28px;gap:14px 32px}
+@media (max-width:980px){.proof-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.proof-grid{gap:10px}.pf,.pf:nth-child(1),.pf:nth-child(3){padding:22px 18px;border-radius:22px}.pf h4{font-size:15px}.pf .d{font-size:13px}}
+/* calc */
+.calc h3{font-size:26px}
+.cfield{display:flex;flex-direction:column;gap:8px}
+.cfield label{display:flex;justify-content:space-between;gap:12px;align-items:baseline;color:#fff;font-size:14px}
+.cfield label b{font-size:22px;font-variant-numeric:tabular-nums}
+.cmp{background:rgba(255,255,255,.08);border-radius:18px;padding:6px 16px}
+.crow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:14px;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:14px}
+.crow:last-child{border-bottom:0}
+.crow em{font-style:normal;color:#E4E4E0;font-size:13px;font-variant-numeric:tabular-nums}
+.crow b{font-size:18px;font-variant-numeric:tabular-nums;min-width:80px;text-align:right}
+.crow.save b{color:#fff;background:var(--red);border-radius:999px;padding:2px 10px}
+.yr{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.yr span{color:#E4E4E0;font-size:14px}
+.yr b{font-size:clamp(40px,4.4vw,56px);letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.minbox{background:rgba(255,255,255,.08);border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.minhd{display:flex;justify-content:space-between;font-size:14px}
+.minhd b{font-size:14px}
+.mbar{height:8px;border-radius:8px;background:rgba(255,255,255,.18);overflow:hidden}.mbar i{display:block;height:100%;background:#fff;border-radius:8px;transition:width .3s}
+.mbar i.low{background:var(--red)}
+/* general responsive */
+@media (max-width:980px){section.blk{padding-block:90px}.hero{padding-block:56px 0}.offer,.chair{padding-block:90px}}
+@media (max-width:600px){.hero .btns .btn{width:100%}.zero{min-height:170px;padding:20px;border-radius:22px}.zero-grid{gap:10px}.panel{padding:24px 20px;border-radius:24px}.panel li{font-size:14px}.ptable{padding:6px 18px;border-radius:24px}.prow{font-size:14px}.prow b{font-size:17px}.calc{padding:24px 20px;border-radius:24px}.scale .btn.xl{width:100%;padding:20px}.clicks div{font-size:13px}.fill-text{font-size:clamp(44px,13vw,80px)}}
+@media (min-width:601px) and (max-width:980px){.zero-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.zero.last{grid-column:span 1}}
+
+.pf .d,.pf:nth-child(1) .d,.pf:nth-child(3) .d{color:var(--grey)}
+@media (max-width:700px){.hud-l{top:auto;bottom:4%;left:4%}.hud-r{top:auto;bottom:4%;right:4%}.hud-b{bottom:auto;top:5%}.demo-note{display:none}}
+.cfield .muted{font-size:12px}
+
+/* === 3D scan stage === */
+.stage.scan3d{background:radial-gradient(120% 90% at 50% 20%,#3A3A37 0%,#252523 55%,#1A1A19 100%);aspect-ratio:1240/600}
+.stage.scan3d canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hud3{position:absolute;color:#fff;font-size:12px;letter-spacing:.06em;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:14px;padding:10px 14px}
+.hud3 small{display:block;color:rgba(255,255,255,.6);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.hud3 b{font-size:20px;font-weight:700;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.hud3.tl{left:3%;top:5%;text-transform:uppercase;font-weight:600;font-size:11px;letter-spacing:.16em}
+.hud3.tr{right:3%;top:5%;flex-direction:column;align-items:flex-end;gap:2px}
+.hud3.bl{left:3%;bottom:6%;flex-direction:column;align-items:stretch;gap:8px;min-width:230px}
+.hud3.bl .row{display:flex;justify-content:space-between;gap:24px}
+.hud3 .pbar{background:rgba(255,255,255,.15)}
+.hud3.br{right:3%;bottom:6%;background:var(--red);border-color:var(--red);font-weight:600;font-size:14px;letter-spacing:0;opacity:0;transform:translateY(12px);transition:all .5s cubic-bezier(.2,.8,.2,1)}
+.hud3.br.on{opacity:1;transform:none}
+.hud3.br svg{width:18px;height:18px}
+@media (max-width:700px){.stage.scan3d{aspect-ratio:4/4.2}.hud3{padding:7px 10px;border-radius:12px}.hud3 b{font-size:15px}.hud3.bl{min-width:0;left:3%;right:3%}.hud3.br{bottom:auto;top:16%;right:3%;font-size:12px}.hud3.tl{font-size:9px}}
 </style>
 </head>
 <body>
@@ -389,21 +475,12 @@ footer .legal{border-color:rgba(255,255,255,.15);color:#E4E4E0}
       <p class="sub">The brand-new Medit i900, powered by Cosmi3D. A unique, all-in digital workflow with honest lab pricing, from $59 per zirconia crown.</p>
       <div class="btns"><a class="btn red" href="#signup" data-go="signup">Get your free Medit i900</a><a class="btn soft" href="#pricing">See the math</a></div>
       <p class="fine">$400 one-time activation · $1,000 monthly lab minimum · month to month</p>
-      <div class="stage" id="stage">
-        <div class="grid-bg"></div>
-        <svg viewBox="0 0 700 360" class="scan" role="img" aria-label="Wireframe illustration of an intraoral scanner scanning a dental arch">
-<g transform="rotate(-16 330 150)" fill="none" stroke="#52524C" stroke-width="1.6" stroke-linejoin="round">
-<path class="draw" d="M100 86 C70 86 56 108 56 130 C56 152 70 174 100 174 L450 162 C462 161 470 158 478 154 L590 150 C602 150 612 142 612 130 C612 118 602 110 590 110 L478 106 C470 102 462 99 450 98 Z"/>
-<g><ellipse class="ring" style="animation-delay:1.00s" cx="120" cy="130" rx="9" ry="43.4"/><ellipse class="ring" style="animation-delay:1.08s" cx="160" cy="130" rx="9" ry="42.2"/><ellipse class="ring" style="animation-delay:1.16s" cx="200" cy="130" rx="9" ry="41.0"/><ellipse class="ring" style="animation-delay:1.24s" cx="240" cy="130" rx="9" ry="39.8"/><ellipse class="ring" style="animation-delay:1.32s" cx="280" cy="130" rx="9" ry="38.6"/><ellipse class="ring" style="animation-delay:1.40s" cx="320" cy="130" rx="9" ry="37.4"/><ellipse class="ring" style="animation-delay:1.48s" cx="360" cy="130" rx="9" ry="36.2"/><ellipse class="ring" style="animation-delay:1.56s" cx="400" cy="130" rx="9" ry="35.0"/><ellipse class="ring" style="animation-delay:1.64s" cx="440" cy="130" rx="9" ry="33.8"/></g>
-<path class="ring" style="animation-delay:1.6s" d="M70 118 L460 110 M70 142 L460 150 M60 130 L610 130 M480 118 L600 120 M480 142 L600 140"/>
-<rect x="560" y="117" width="36" height="26" rx="7" fill="#D90F2C" stroke="none"/>
-<path d="M190 120 L260 118" stroke="#D90F2C" stroke-width="3" stroke-linecap="round"/>
-</g>
-<g class="beam" fill="none" stroke="#D90F2C" stroke-width="1.3" opacity=".75"><path d="M548 176 L470 300 M570 172 L610 300 M558 176 L540 305"/><path d="M470 300 Q540 318 610 300" stroke-dasharray="4 6"/></g>
-<g fill="#D90F2C"><circle class="tooth" style="animation-delay:0.00s;transform-origin:581.7px 268.5px" cx="581.7" cy="268.5" r="5"/><circle class="tooth" style="animation-delay:0.18s;transform-origin:557.5px 285.3px" cx="557.5" cy="285.3" r="5"/><circle class="tooth" style="animation-delay:0.36s;transform-origin:519.9px 298.5px" cx="519.9" cy="298.5" r="5"/><circle class="tooth" style="animation-delay:0.54s;transform-origin:472.5px 307.1px" cx="472.5" cy="307.1" r="5"/><circle class="tooth" style="animation-delay:0.72s;transform-origin:420.0px 310.0px" cx="420.0" cy="310.0" r="5"/><circle class="tooth" style="animation-delay:0.90s;transform-origin:367.5px 307.1px" cx="367.5" cy="307.1" r="5"/><circle class="tooth" style="animation-delay:1.08s;transform-origin:320.1px 298.5px" cx="320.1" cy="298.5" r="5"/><circle class="tooth" style="animation-delay:1.26s;transform-origin:282.5px 285.3px" cx="282.5" cy="285.3" r="5"/><circle class="tooth" style="animation-delay:1.44s;transform-origin:258.3px 268.5px" cx="258.3" cy="268.5" r="5"/></g>
-</svg>
-        <div class="chip c1"><b>98%</b> fit without adjustment</div>
-        <div class="chip c2"><b>8 days</b> door to door, digital</div>
+      <div class="stage scan3d" id="stage">
+        <canvas id="scanCv" aria-label="Animation: a 3D dental arch is captured point by point by the scanner, then sent to Cosmilab"></canvas>
+        <div class="hud3 tl"><span class="dotlive"></span><span>Cosmi3D · live scan</span></div>
+        <div class="hud3 tr"><small>Points captured</small><b id="scanPts">0</b></div>
+        <div class="hud3 bl"><div class="row"><div><small>Scan time</small><b id="scanTime">0:00</b></div><div><small id="scanLabel">Lower arch</small><b id="scanPct">0%</b></div></div><div class="pbar"><i id="scanBar"></i></div></div>
+        <div class="hud3 br" id="scanDone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg><span>Sent to Cosmilab</span></div>
       </div>
     </div>
   </section>
@@ -411,7 +488,7 @@ footer .legal{border-color:rgba(255,255,255,.15);color:#E4E4E0}
   <section class="blk" id="free">
     <div class="wrap center">
       <div class="eyebrow reveal">No asterisk on the hardware</div>
-      <h2 class="h2 reveal" style="margin-top:14px">At Cosmilab, free <span class="red">actually</span> means free.</h2>
+      <h2 class="h2 reveal" style="margin-top:14px">At Cosmilab, free<br><span class="red">actually</span> means free.</h2>
       <div class="zero-grid">
         <div class="zero reveal"><span>Medit i900<em>Brand new</em></span><b data-zero>$0</b></div>
         <div class="zero reveal" style="transition-delay:.08s"><span>Computer<em>Configured for scanning</em></span><b data-zero>$0</b></div>
@@ -444,23 +521,15 @@ footer .legal{border-color:rgba(255,255,255,.15);color:#E4E4E0}
   <section class="blk" id="benefits">
     <div class="wrap">
       <div class="eyebrow reveal">Why Cosmi3D</div>
-      <h2 class="h2 reveal" style="margin-top:14px;max-width:900px">One scanner. One lab. <span class="red">Zero</span> friction.</h2>
+      <h2 class="h2 reveal" style="margin-top:14px">One scanner. One lab.<br><span class="red">Zero</span> friction.</h2>
       <div class="bento">
-        <div class="card s4 reveal">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
-          <h3>A brand-new Medit i900.<br>Not a refurb. Not a loaner.</h3>
-          <p>Configured, installed and ready to scan, with a dedicated laptop that runs Cosmi3D and nothing else.</p>
-          <svg viewBox="0 0 700 360" class="mini-scan" role="img" aria-label="Wireframe illustration of an intraoral scanner scanning a dental arch">
-<g transform="rotate(-16 330 150)" fill="none" stroke="#52524C" stroke-width="1.6" stroke-linejoin="round">
-<path  d="M100 86 C70 86 56 108 56 130 C56 152 70 174 100 174 L450 162 C462 161 470 158 478 154 L590 150 C602 150 612 142 612 130 C612 118 602 110 590 110 L478 106 C470 102 462 99 450 98 Z"/>
-<g><ellipse  style="animation-delay:1.00s" cx="120" cy="130" rx="9" ry="43.4"/><ellipse  style="animation-delay:1.08s" cx="160" cy="130" rx="9" ry="42.2"/><ellipse  style="animation-delay:1.16s" cx="200" cy="130" rx="9" ry="41.0"/><ellipse  style="animation-delay:1.24s" cx="240" cy="130" rx="9" ry="39.8"/><ellipse  style="animation-delay:1.32s" cx="280" cy="130" rx="9" ry="38.6"/><ellipse  style="animation-delay:1.40s" cx="320" cy="130" rx="9" ry="37.4"/><ellipse  style="animation-delay:1.48s" cx="360" cy="130" rx="9" ry="36.2"/><ellipse  style="animation-delay:1.56s" cx="400" cy="130" rx="9" ry="35.0"/><ellipse  style="animation-delay:1.64s" cx="440" cy="130" rx="9" ry="33.8"/></g>
-<path  style="animation-delay:1.6s" d="M70 118 L460 110 M70 142 L460 150 M60 130 L610 130 M480 118 L600 120 M480 142 L600 140"/>
-<rect x="560" y="117" width="36" height="26" rx="7" fill="#D90F2C" stroke="none"/>
-<path d="M190 120 L260 118" stroke="#D90F2C" stroke-width="3" stroke-linecap="round"/>
-</g>
-<g class="beam" fill="none" stroke="#D90F2C" stroke-width="1.3" opacity=".75"><path d="M548 176 L470 300 M570 172 L610 300 M558 176 L540 305"/><path d="M470 300 Q540 318 610 300" stroke-dasharray="4 6"/></g>
-<g fill="#D90F2C"><circle class="tooth" style="animation-delay:0.00s;transform-origin:581.7px 268.5px" cx="581.7" cy="268.5" r="5"/><circle class="tooth" style="animation-delay:0.18s;transform-origin:557.5px 285.3px" cx="557.5" cy="285.3" r="5"/><circle class="tooth" style="animation-delay:0.36s;transform-origin:519.9px 298.5px" cx="519.9" cy="298.5" r="5"/><circle class="tooth" style="animation-delay:0.54s;transform-origin:472.5px 307.1px" cx="472.5" cy="307.1" r="5"/><circle class="tooth" style="animation-delay:0.72s;transform-origin:420.0px 310.0px" cx="420.0" cy="310.0" r="5"/><circle class="tooth" style="animation-delay:0.90s;transform-origin:367.5px 307.1px" cx="367.5" cy="307.1" r="5"/><circle class="tooth" style="animation-delay:1.08s;transform-origin:320.1px 298.5px" cx="320.1" cy="298.5" r="5"/><circle class="tooth" style="animation-delay:1.26s;transform-origin:282.5px 285.3px" cx="282.5" cy="285.3" r="5"/><circle class="tooth" style="animation-delay:1.44s;transform-origin:258.3px 268.5px" cx="258.3" cy="268.5" r="5"/></g>
-</svg>
+        <div class="card s4 feature reveal">
+          <div class="ftxt">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
+            <h3>A brand-new Medit i900. Not a refurb. Not a loaner.</h3>
+            <p>Configured, installed and ready to scan, with a dedicated laptop that runs Cosmi3D and nothing else.</p>
+          </div>
+          <div class="fart"><svg viewBox="0 0 320 200" aria-hidden="true"><g fill="none" stroke="#52524C" stroke-width="2" stroke-linejoin="round"><path d="M40 72 C22 72 14 86 14 100 C14 114 22 128 40 128 L214 121 C222 120 228 118 232 115 L292 113 C300 113 306 108 306 100 C306 92 300 87 292 87 L232 85 C228 82 222 80 214 79 Z" fill="#FFFFFF"/><path d="M60 88 L210 84 M60 112 L210 116" opacity=".35"/><g opacity=".45"><ellipse cx="70" cy="100" rx="6" ry="26"/><ellipse cx="100" cy="100" rx="6" ry="25"/><ellipse cx="130" cy="100" rx="6" ry="24"/><ellipse cx="160" cy="100" rx="6" ry="23"/><ellipse cx="190" cy="100" rx="6" ry="22"/></g></g><rect x="274" y="92" width="24" height="16" rx="5" fill="#D90F2C"/><circle cx="120" cy="100" r="5" fill="#D90F2C"/><g stroke="#D90F2C" stroke-width="1.5" opacity=".6"><path d="M286 116 L262 170 M286 116 L306 170"/></g><path d="M246 176 Q284 190 322 176" stroke="#D90F2C" stroke-width="2" fill="none" stroke-dasharray="4 5"/></svg></div>
         </div>
         <div class="card s2 redc reveal">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
@@ -501,7 +570,7 @@ footer .legal{border-color:rgba(255,255,255,.15);color:#E4E4E0}
     <div class="ring"></div>
     <div class="wrap">
       <div class="eyebrow reveal">The offer</div>
-      <h2 class="h2 reveal" style="margin-top:14px;max-width:900px">Everything you need to go digital. Nothing you don't.</h2>
+      <h2 class="h2 reveal" style="margin-top:14px">Everything to go digital.<br>Nothing you don't.</h2>
       <div class="offer-grid">
         <div class="panel reveal">
           <h3>What you get</h3>
@@ -534,10 +603,10 @@ footer .legal{border-color:rgba(255,255,255,.15);color:#E4E4E0}
       <div class="eyebrow reveal">The proof</div>
       <h2 class="h2 reveal" style="margin-top:14px">Numbers, not adjectives.</h2>
       <div class="proof-grid reveal">
-        <div class="pf"><b><span class="count" data-to="98">98</span><span class="u">%</span></b><span>of cases fit without adjustment</span><small>Medit i900 + Cosmi3D</small></div>
-        <div class="pf"><b><span class="count" data-to="8">8</span><span class="u"> days</span></b><span>door to door on digital cases</span><small>12 days for physical impressions</small></div>
-        <div class="pf"><b><span class="u">$</span><span class="count" data-to="59">59</span></b><span>zirconia monolithic crown</span><small>$49 model-free</small></div>
-        <div class="pf"><b><span class="count" data-to="2010">2010</span></b><span>our group's lab experience since</span><small>Now serving US practices from New Rochelle, NY</small></div>
+        <div class="pf"><b><span class="count" data-to="98">98</span><span class="u">%</span></b><h4>Fit first time</h4><span class="d">Cases that need no adjustment, with the Medit i900 and Cosmi3D.</span></div>
+        <div class="pf"><b><span class="count" data-to="8">8</span><span class="u">days</span></b><h4>Door to door</h4><span class="d">On digital cases. 12 days for physical impressions.</span></div>
+        <div class="pf"><b><span class="u">$</span><span class="count" data-to="59">59</span></b><h4>Zirconia crown</h4><span class="d">Monolithic. $49 model-free.</span></div>
+        <div class="pf"><b><span class="count" data-to="2010">2010</span></b><h4>Lab experience since</h4><span class="d">Our group's track record, now serving US practices from New York.</span></div>
       </div>
       <div class="strip reveal"><span><i></i>Materials certified to international standards</span><span><i></i>Lot numbers on your traceability records</span><span><i></i>Order tracking in the Cosmilab app</span></div>
     </div>
@@ -547,26 +616,34 @@ footer .legal{border-color:rgba(255,255,255,.15);color:#E4E4E0}
     <div class="wrap">
       <div class="center">
         <div class="eyebrow reveal">Pricing</div>
-        <h2 class="h2 reveal" style="margin-top:14px">Honest prices. Per item. <span class="red">Always.</span></h2>
+        <h2 class="h2 reveal" style="margin-top:14px">Honest prices, per item.<br><span class="red">Always.</span></h2>
         <p class="lead reveal" style="margin-top:18px">Our full fee schedule, the same one written into your agreement.</p>
       </div>
       <div class="ptabs" role="tablist" aria-label="Price categories" id="ptabs"></div>
       <div class="price-wrap">
         <div class="ptable" id="ptable" role="tabpanel" aria-live="polite"></div>
-        <div class="calc">
-          <h3>See the math</h3>
-          <label for="crowns">Crowns per month <b id="crownsOut">20</b></label>
-          <input type="range" id="crowns" min="5" max="80" step="1" value="20">
-          <div>
-            <div class="muted">Saved per year at $50 less per crown</div>
-            <div class="out" id="saveOut">$12,000</div>
+        <div class="calc" id="calc">
+          <h3>What Cosmi3D is worth to you</h3>
+          <p class="muted" style="margin:-8px 0 0">Lower crown prices, plus a scanner you don't pay for. Three numbers, we do the rest.</p>
+          <div class="cfield"><label for="crowns"><span><strong>1.</strong> Crowns you send per month</span><b id="crownsOut">20</b></label><input type="range" id="crowns" min="4" max="80" step="1" value="20"></div>
+          <div class="cfield"><label for="curPrice"><span><strong>2.</strong> Your lab's price per zirconia crown today</span><b id="curOut">$109</b></label><input type="range" id="curPrice" min="60" max="200" step="1" value="109"></div>
+          <div class="cfield"><label for="scanPrice"><span><strong>3.</strong> What a new Medit i900 would cost you</span><b id="scanOut">$18,000</b></label><input type="range" id="scanPrice" min="12000" max="30000" step="500" value="18000"><span class="muted">US dealer prices typically run about $16,000 to $25,000 depending on bundle.</span></div>
+          <div class="cmp">
+            <div class="crow"><span>Crowns today</span><em id="todayF">20 × $109</em><b id="todayOut">$2,180</b></div>
+            <div class="crow"><span>Crowns with Cosmilab</span><em id="cosF">20 × $59</em><b id="cosOut">$1,180</b></div>
+            <div class="crow save"><span>Crown savings</span><em>per month</em><b id="saveMo">$1,000</b></div>
           </div>
-          <div class="row2">
-            <div class="box"><b id="monthOut">$1,180</b><span>monthly, in zirconia crowns at $59</span></div>
-            <div class="box"><b>17</b><span>zirconia crowns cover the $1,000 monthly minimum</span></div>
+          <div class="cmp">
+            <div class="crow"><span>Crown savings</span><em>per year</em><b id="saveOut">$12,000</b></div>
+            <div class="crow"><span>Medit i900 + laptop</span><em>you don't buy</em><b id="scanSave">$18,000</b></div>
+            <div class="crow"><span>Activation fee</span><em>one time</em><b>-$400</b></div>
           </div>
-          <p class="muted" style="margin:0">Illustration based on a $50 per-crown difference. Your savings depend on your current lab's prices.</p>
+          <div class="yr"><span>Your first-year value</span><b id="yearOne">$29,600</b></div>
+          <p class="muted" style="margin:-10px 0 0">Every year after: <strong id="yearN" style="color:#fff">$12,000</strong> in crown savings, and the scanner is still $0.</p>
+          <div class="minbox"><div class="minhd"><span>Your $1,000 monthly minimum</span><b id="minOut">Covered</b></div><div class="mbar"><i id="minBar"></i></div><span class="muted" id="minTxt">20 crowns at $59 = $1,180, above the minimum.</span></div>
+          <p class="muted" style="margin:0">Cosmilab price: $59 per monolithic zirconia crown, from our fee schedule. The scanner stays Cosmilab property and is returned if you leave. Change the numbers to match your practice.</p>
         </div>
+      </div>
       </div>
     </div>
   </section>
@@ -574,8 +651,8 @@ footer .legal{border-color:rgba(255,255,255,.15);color:#E4E4E0}
   <section class="scale" id="scale">
     <div class="wrap"><div class="inner">
       <div class="eyebrow reveal">Ready to scale?</div>
-      <h2 class="h2 reveal" style="margin-top:14px">Your free Medit i900.<br><span class="red">Three clicks away.</span></h2>
-      <div class="clicks reveal"><div><i>1</i>Your practice</div><div><i>2</i>Payment and training</div><div><i>3</i>Sign and activate</div></div>
+      <h2 class="h2 reveal" style="margin-top:14px">Your free Medit i900.<br><span class="red">Four steps away.</span></h2>
+      <div class="clicks reveal"><div><i>1</i>Your practice</div><div><i>2</i>Payment</div><div><i>3</i>Training</div><div><i>4</i>Sign and activate</div></div>
       <a class="btn red xl reveal" href="#signup" data-go="signup">Get your free Medit i900 scanner</a>
       <p class="fine" style="margin-top:16px;font-size:12px;color:var(--mid)">$400 one-time activation · $1,000 monthly lab minimum · month to month</p>
     </div></div>
@@ -585,11 +662,12 @@ footer .legal{border-color:rgba(255,255,255,.15);color:#E4E4E0}
 <main class="view su" id="v-signup" hidden>
   <div class="wrap">
     <div class="su-head">
-      <div><div class="eyebrow">Get your free Medit i900</div><h1 style="margin-top:8px">Three clicks. <span class="red">That's it.</span></h1></div>
+      <div><div class="eyebrow">Get your free Medit i900</div><h1 style="margin-top:8px">Four steps. <span class="red">That's it.</span></h1></div>
       <div class="progress" aria-label="Progress">
         <div class="pstep" data-i="0"><i>1</i><span>Practice</span></div><div class="bar"></div>
-        <div class="pstep" data-i="1"><i>2</i><span>Payment and training</span></div><div class="bar"></div>
-        <div class="pstep" data-i="2"><i>3</i><span>Sign and activate</span></div>
+        <div class="pstep" data-i="1"><i>2</i><span>Payment</span></div><div class="bar"></div>
+        <div class="pstep" data-i="2"><i>3</i><span>Training</span></div><div class="bar"></div>
+        <div class="pstep" data-i="3"><i>4</i><span>Sign and activate</span></div>
       </div>
     </div>
     <div class="su-grid">
@@ -612,7 +690,7 @@ footer .legal{border-color:rgba(255,255,255,.15);color:#E4E4E0}
         </div>
         <!-- STEP 2 -->
         <div class="spane" data-p="1" hidden>
-          <h2>Payment and training</h2>
+          <h2>Payment</h2>
           <p class="sub" style="margin-top:6px">Used for the $400 activation, then monthly invoices charged on the 8th.</p>
           <div class="pm" style="margin-top:22px">
             <label><input type="radio" name="pm" value="ach" checked><span>ACH bank debit<small>Instant bank verification</small></span></label>
@@ -620,8 +698,12 @@ footer .legal{border-color:rgba(255,255,255,.15);color:#E4E4E0}
           </div>
           <div class="secure" style="margin-top:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Secure payment module from <span class="ph">[payment provider]</span>. Demo: no bank or card details are collected here.</span></div>
           <div class="verify" style="margin-top:12px"><button type="button" class="btn soft" id="verifyBtn" style="padding:12px 20px;font-size:14px">Verify payment method</button><span class="badge" id="verifyBadge">Not verified</span></div>
-          <div class="subh" style="margin-top:30px">Book your training</div>
-          <div class="cal-pick" style="margin-top:16px">
+        </div>
+        <!-- STEP 3 -->
+        <div class="spane" data-p="2" hidden>
+          <h2>Book your training</h2>
+          <p class="sub" style="margin-top:6px">Your whole scanning team, before the scanner ships. You can reschedule later.</p>
+          <div class="cal-pick" style="margin-top:22px">
             <div class="calendly">
               <div class="hd"><span>Pick a date and time</span><span class="badge">Calendly <span class="ph">[link]</span></span></div>
               <div class="dates" id="dates"></div>
@@ -635,8 +717,8 @@ footer .legal{border-color:rgba(255,255,255,.15);color:#E4E4E0}
           </div>
           <div class="policy" style="margin-top:14px"><strong>Good to know.</strong> No reply to our check-in email two days before? Your training goes ahead as planned. Cancel or reschedule at least 24 hours ahead. Later, or a no-show, and a new session is $400.</div>
         </div>
-        <!-- STEP 3 -->
-        <div class="spane" data-p="2" hidden>
+        <!-- STEP 4 -->
+        <div class="spane" data-p="3" hidden>
           <h2>Sign and activate</h2>
           <p class="sub" style="margin-top:6px">Scroll to the end of the agreement, then sign. E-signature by <span class="ph">[DocuSign or equivalent]</span>.</p>
           <div class="doc-shell" style="margin-top:20px">
@@ -837,9 +919,16 @@ Object.keys(P).forEach((k,i)=>{const b=document.createElement('button');b.type='
 function pick(k){[...ptabs.children].forEach(b=>b.setAttribute('aria-selected',b.textContent===k));
   ptable.innerHTML=P[k].map(([n,p,hot])=>`<div class="prow${hot?' hot':''}"><span>${n}${hot?'<span class="tag">Most ordered</span>':''}</span><b>$${p}</b></div>`).join('');}
 pick("Crowns & bridges");
-const cr=$('#crowns'); const fmt=n=>'$'+n.toLocaleString('en-US');
-function calc(){const n=+cr.value;$('#crownsOut').textContent=n;$('#saveOut').textContent=fmt(n*50*12);$('#monthOut').textContent=fmt(n*59);}
-cr.addEventListener('input',calc); calc();
+const cr=$('#crowns'), cp=$('#curPrice'), sp=$('#scanPrice'); const fmt=n=>(n<0?'-':'')+'$'+Math.abs(n).toLocaleString('en-US');
+function calc(){const n=+cr.value,c=+cp.value,t=n*c,k=n*59,sv=t-k;
+  $('#crownsOut').textContent=n;$('#curOut').textContent=fmt(c);
+  $('#todayF').textContent=n+' × '+fmt(c);$('#todayOut').textContent=fmt(t);
+  $('#cosF').textContent=n+' × $59';$('#cosOut').textContent=fmt(k);
+  $('#saveMo').textContent=fmt(sv);$('#saveOut').textContent=fmt(sv*12);const sc=+sp.value;$('#scanOut').textContent=fmt(sc);$('#scanSave').textContent=fmt(sc);$('#yearOne').textContent=fmt(sv*12+sc-400);$('#yearN').textContent=fmt(sv*12);
+  const pctm=Math.min(100,Math.round(k/1000*100));const bar=$('#minBar');bar.style.width=pctm+'%';bar.classList.toggle('low',k<1000);
+  $('#minOut').textContent=k>=1000?'Covered':'Top-up '+fmt(1000-k);
+  $('#minTxt').textContent=k>=1000?`${n} crowns at $59 = ${fmt(k)}, above the minimum.`:`${n} crowns at $59 = ${fmt(k)}. The ${fmt(1000-k)} difference is billed at month end.`;}
+cr.addEventListener('input',calc); cp.addEventListener('input',calc); sp.addEventListener('input',calc); calc();
 
 /* ---------- signup ---------- */
 const team=$('#team'); let tid=0;
@@ -875,17 +964,18 @@ $('#clearPad').onclick=()=>{ctx.clearRect(0,0,pad.width,pad.height);drawn=false;
 const panes=$$('.spane'), ps=$$('.pstep'), err=$('#err'), nextBtn=$('#nextBtn'), back=$('#back'); let cur=0;
 const val=id=>$('#'+id).value.trim();
 function step(i){cur=i;panes.forEach(p=>p.hidden=+p.dataset.p!==i);ps.forEach((p,j)=>{p.classList.toggle('on',j===i);p.classList.toggle('ok',j<i);});
-  err.textContent='';back.style.visibility=i===0?'hidden':'visible';nextBtn.textContent=i===2?'Sign and pay $400':'Continue';
-  if(i===2){$('#sg-name').value=val('f-name');$('#sg-date').value=new Date().toLocaleDateString('en-US');$('#typed').textContent=val('f-name');$('#docPractice').textContent=val('f-practice');$('#docName').textContent=val('f-name');
+  err.textContent='';back.style.visibility=i===0?'hidden':'visible';nextBtn.textContent=i===3?'Sign and pay $400':'Continue';
+  if(i===3){$('#sg-name').value=val('f-name');$('#sg-date').value=new Date().toLocaleDateString('en-US');$('#typed').textContent=val('f-name');$('#docPractice').textContent=val('f-practice');$('#docName').textContent=val('f-name');
     $$('.paper .dfill').forEach(el=>{const f=el.dataset.f;el.textContent=f==='date'?new Date().toLocaleDateString('fr-FR'):f==='pm'?($('input[name="pm"]:checked').value==='ach'?'Prélèvement ACH, vérifié':'Carte bancaire, vérifiée'):($('#'+f).value||'—');});
     read=false;doc.scrollTop=0;pct.textContent='0% read';}
   window.scrollTo({top:0,behavior:'smooth'});}
 function check(i){
   if(i===0){if(!val('f-name')||!val('f-practice')||!val('f-addr'))return 'Add your name, practice name and address.';if(!/^\S+@\S+\.\S+$/.test(val('f-email')))return 'Enter a valid notification email.';if(![...team.querySelectorAll('input[id^="tm-n-"]')].some(x=>x.value.trim()))return 'Add at least one person who will scan.';}
-  if(i===1){if(!verified)return 'Verify your payment method to continue.';if(!pDate||!pSlot)return 'Pick a training date and time.';}
-  if(i===2){if(!read)return 'Scroll to the end of the agreement before signing.';if(mode==='draw'&&!drawn)return 'Draw your signature, or switch to Type.';if(!$('#c1').checked)return 'Accept the agreement to sign.';if(!$('#c2').checked)return 'Authorize the $400 activation charge to finish.';}
+  if(i===1){if(!verified)return 'Verify your payment method to continue.';}
+  if(i===2){if(!pDate||!pSlot)return 'Pick a training date and time.';}
+  if(i===3){if(!read)return 'Scroll to the end of the agreement before signing.';if(mode==='draw'&&!drawn)return 'Draw your signature, or switch to Type.';if(!$('#c1').checked)return 'Accept the agreement to sign.';if(!$('#c2').checked)return 'Authorize the $400 activation charge to finish.';}
   return '';}
-$('#suForm').addEventListener('submit',e=>{e.preventDefault();const m=check(cur);if(m){err.textContent=m;return;} if(cur<2){step(cur+1);return;} finish();});
+$('#suForm').addEventListener('submit',e=>{e.preventDefault();const m=check(cur);if(m){err.textContent=m;return;} if(cur<3){step(cur+1);return;} finish();});
 back.onclick=()=>step(Math.max(0,cur-1));
 function finish(){
   const name=val('f-name'), img=mode==='draw'&&drawn?pad.toDataURL('image/png'):null;
@@ -897,6 +987,89 @@ function finish(){
   const t=document.createElement('span');t.textContent=`Signed ${when} · certificate ${id}`;sig.appendChild(t);
   show('welcome');
 }
+})();
+
+/* ---------- 3D point-cloud scan ---------- */
+(function(){
+  const cv=document.getElementById('scanCv'); if(!cv) return;
+  const ctx=cv.getContext('2d'); const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // arch curve in model space (x right, y up, z depth; incisors toward viewer)
+  const C=t=>({x:1.55*t,z:-0.72+1.45*t*t});
+  const N=400, cp=[];for(let i=0;i<=N;i++)cp.push(C(-1+2*i/N));
+  const AL=[0];for(let i=1;i<=N;i++)AL.push(AL[i-1]+Math.hypot(cp[i].x-cp[i-1].x,cp[i].z-cp[i-1].z));
+  const TOT=AL[N];
+  function frame(len){let i=AL.findIndex(v=>v>=len);if(i<=0)i=1;const a=cp[i-1],b=cp[i],k=(len-AL[i-1])/((AL[i]-AL[i-1])||1);
+    const x=a.x+(b.x-a.x)*k,z=a.z+(b.z-a.z)*k;let tx=b.x-a.x,tz=b.z-a.z;const m=Math.hypot(tx,tz)||1;tx/=m;tz/=m;let nx=tz,nz=-tx;if(nx*x+nz*(z-0.2)<0){nx=-nx;nz=-nz;}return{x,z,tx,tz,nx,nz};}
+  const P=[]; // {x,y,z,nx,ny,nz,s,type}
+  const W=[.30,.29,.23,.22,.20,.165,.15,.15,.165,.20,.22,.23,.29,.30], gap=.02, sum=W.reduce((a,b)=>a+b,0)+gap*(W.length-1);
+  let pos=(TOT-sum)/2; const start=pos;
+  const rnd=(function(){let x=7;return()=>{x^=x<<13;x^=x>>17;x^=x<<5;return ((x>>>0)%10000)/10000;};})();
+  W.forEach((w,ti)=>{const c=pos+w/2;pos+=w+gap;const f=frame(c);const molar=w>.25,pre=w>.2&&!molar;
+    const a=w/2, b=(molar?.27:pre?.2:.13)/2, h=molar?.2:pre?.23:.26, n=molar?360:pre?300:240;
+    for(let i=0;i<n;i++){const u=rnd()*Math.PI*2, v=-0.5+rnd()*2.07; // v: -0.5 (wall) .. pi/2 (top)
+      const cv_=Math.cos(Math.min(v,Math.PI/2)), sv=Math.sin(Math.max(0,Math.min(v,Math.PI/2)));
+      let lx=a*Math.sign(Math.cos(u))*Math.pow(Math.abs(Math.cos(u)),.7)*(v<0?1:cv_), lz=b*Math.sign(Math.sin(u))*Math.pow(Math.abs(Math.sin(u)),.7)*(v<0?1:cv_);
+      let ly=v<0? v*0.18 : h*sv*(molar?1+0.18*Math.cos(2*u)*Math.cos(3*u):pre?1+0.12*Math.cos(2*u):1);
+      if(!molar&&!pre&&v>=0) ly*=1-0.25*Math.abs(Math.sin(u)); // flatter incisal edge
+      const x=f.x+f.tx*lx+f.nx*lz, z=f.z+f.tz*lx+f.nz*lz;
+      let nnx=f.tx*lx/a*0.6+f.nx*lz/b*0.6, nny=v<0?0.1:sv*1.2+0.2, nnz=f.tz*lx/a*0.6+f.nz*lz/b*0.6; const m=Math.hypot(nnx,nny,nnz)||1;
+      P.push({x,y:ly+0.02,z,nx:nnx/m,ny:nny/m,nz:nnz/m,s:c+(lx),type:0});}});
+  // gum: half tube under the teeth
+  for(let i=0;i<3600;i++){const len=start-0.08+rnd()*(sum+0.16);const f=frame(len);const ph=rnd()*Math.PI;const r=.21;
+    const ox=Math.cos(ph)*r, oy=Math.sin(ph)*r*0.55;
+    P.push({x:f.x+f.nx*ox,y:-0.1+oy-0.08,z:f.z+f.nz*ox,nx:f.nx*Math.cos(ph),ny:Math.sin(ph),nz:f.nz*Math.cos(ph),s:len,type:1});}
+  // light
+  const L=(()=>{const v=[-0.35,1,-0.55];const m=Math.hypot(...v);return v.map(q=>q/m);})();
+  P.forEach(p=>{p.b=0.45+0.55*Math.max(0,p.nx*L[0]+p.ny*L[1]+p.nz*L[2]);});
+  const S0=start-0.1, S1=start+sum+0.1, TOTAL_PTS=1284000;
+  let W_,H_,DPR;
+  function size(){const r=cv.getBoundingClientRect();DPR=Math.min(2,devicePixelRatio||1);W_=r.width;H_=r.height;cv.width=W_*DPR;cv.height=H_*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);}
+  size(); addEventListener('resize',size);
+  const els={t:document.getElementById('scanTime'),p:document.getElementById('scanPct'),b:document.getElementById('scanBar'),d:document.getElementById('scanDone'),n:document.getElementById('scanPts')};
+  const DUR=7000,HOLD=3200;
+  function draw(k,time,hold){
+    const sweep=S0+(S1-S0)*k;
+    ctx.clearRect(0,0,W_,H_);
+    const yaw=Math.sin(time/5200)*0.35 + (hold?hold*0.6:0), pitch=-0.95;
+    const cy=Math.cos(yaw),sy=Math.sin(yaw),cx=Math.cos(pitch),sx=Math.sin(pitch);
+    const scale=W_<600?Math.min(W_/3.3,H_/2):Math.min(W_/4.1,H_/2.2), ox=W_/2, oy=H_*(W_<600?0.48:0.5), dist=6;
+    const proj=(x,y,z)=>{let X=x*cy+z*sy, Z=-x*sy+z*cy; let Y=y*cx-Z*sx; Z=y*sx+Z*cx; const q=dist/(dist+Z); return [ox+X*scale*q, oy-Y*scale*q, q, Z];};
+    // floor grid
+    ctx.lineWidth=1;ctx.strokeStyle='rgba(255,255,255,.06)';
+    for(let g=-2;g<=2;g+=0.25){let a=proj(g,-0.35,-1.6),b=proj(g,-0.35,1.8);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();a=proj(-2,-0.35,g);b=proj(2,-0.35,g);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}
+    // points
+    for(let i=0;i<P.length;i++){const p=P[i];const [X,Y,q]=proj(p.x,p.y,p.z);const d=sweep-p.s;const sz=(p.type?1.7:2.1)*q*(W_<600?0.85:1);
+      if(d<0){ctx.fillStyle='rgba(200,200,195,.14)';ctx.fillRect(X,Y,sz,sz);continue;}
+      if(d<0.07&&k<1){ctx.fillStyle='rgba(255,70,90,.95)';ctx.fillRect(X-sz*.4,Y-sz*.4,sz*1.8,sz*1.8);continue;}
+      if(p.type===1){ctx.fillStyle=`rgba(217,15,44,${(0.35+0.55*p.b).toFixed(2)})`;}
+      else{const c=Math.round(150+105*p.b);ctx.fillStyle=`rgb(${c},${c},${Math.round(c*.985)})`;}
+      ctx.fillRect(X,Y,sz,sz);}
+    // scan head + laser
+    if(k<1){const f=frame(Math.max(S0,Math.min(S1,sweep)));const hx=f.x,hz=f.z;
+      const head=proj(hx+f.nx*0.18,0.7,hz+f.nz*0.18);
+      const targets=[[-.34,.02],[.34,.02],[-.34,.3],[.34,.3]].map(([o,y])=>proj(hx+f.nx*o,y,hz+f.nz*o));
+      const g=ctx.createLinearGradient(head[0],head[1],head[0],targets[0][1]);g.addColorStop(0,'rgba(217,15,44,.55)');g.addColorStop(1,'rgba(217,15,44,0)');
+      ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(head[0],head[1]);ctx.lineTo(targets[0][0],targets[0][1]);ctx.lineTo(targets[1][0],targets[1][1]);ctx.closePath();ctx.fill();
+      ctx.strokeStyle='rgba(255,90,110,.9)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(targets[0][0],targets[0][1]);ctx.lineTo(targets[1][0],targets[1][1]);ctx.stroke();
+      // reticle
+      const r=proj(hx,0.12,hz);ctx.strokeStyle='rgba(255,255,255,.7)';ctx.lineWidth=1.2;const R=18*r[2];ctx.beginPath();ctx.arc(r[0],r[1],R,0,Math.PI*2);ctx.stroke();
+      ctx.beginPath();[[-1,0],[1,0],[0,-1],[0,1]].forEach(([a,b])=>{ctx.moveTo(r[0]+a*R*1.5,r[1]+b*R*1.5);ctx.lineTo(r[0]+a*R*0.6,r[1]+b*R*0.6);});ctx.stroke();
+      // head body
+      ctx.save();ctx.translate(head[0],head[1]);ctx.fillStyle='#FFFFFF';ctx.strokeStyle='rgba(255,255,255,.35)';
+      ctx.beginPath();ctx.roundRect? ctx.roundRect(-22*head[2],-9*head[2],44*head[2],18*head[2],8*head[2]) : ctx.rect(-22,-9,44,18);ctx.fill();
+      ctx.fillStyle='#D90F2C';ctx.fillRect(-8*head[2],-3*head[2],16*head[2],6*head[2]);
+      ctx.strokeStyle='rgba(255,255,255,.5)';ctx.lineWidth=10*head[2];ctx.lineCap='round';ctx.beginPath();ctx.moveTo(0,-9*head[2]);ctx.lineTo(0,-46*head[2]);ctx.stroke();ctx.restore();}
+    // HUD
+    const pc=Math.round(k*100);els.p.textContent=pc+'%';els.b.style.width=pc+'%';els.t.textContent='0:'+String(Math.round(k*45)).padStart(2,'0');
+    els.n.textContent=Math.round(TOTAL_PTS*Math.pow(k,1.1)).toLocaleString('en-US');
+    els.d.classList.toggle('on',k>=1);
+  }
+  if(reduce){draw(1,0,0);return;}
+  let t0=null,vis=true;new IntersectionObserver(e=>{vis=e[0].isIntersecting;},{threshold:.02}).observe(cv);
+  function loop(ts){if(t0===null)t0=ts;const e=ts-t0;
+    if(vis&&!document.hidden){if(e<DUR)draw(e/DUR,ts,0);else if(e<DUR+HOLD)draw(1,ts,(e-DUR)/HOLD);else t0=ts;}
+    requestAnimationFrame(loop);}
+  requestAnimationFrame(loop);
 })();
 </script>
 
