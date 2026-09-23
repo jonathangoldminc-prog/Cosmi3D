@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parcours Scanner Cosmilab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
+<style>
+:root{
+  --red:#D7132F; --red-deep:#A80E24; --red-soft:#FCE8EB;
+  --ink:#141214; --ink-2:#3D3A3D; --muted:#6B676B;
+  --ground:#F6F5F5; --surface:#FFFFFF; --line:#E6E3E4; --chip:#F0EEEF;
+  --on-red:#FFFFFF; --shadow:0 18px 40px -24px rgba(20,18,20,.35);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --red:#FF3B55; --red-deep:#E0223D; --red-soft:#3A1419;
+    --ink:#F4F2F3; --ink-2:#D2CED0; --muted:#A39EA1;
+    --ground:#121012; --surface:#1C191B; --line:#302C2E; --chip:#262224;
+    --on-red:#FFFFFF; --shadow:0 18px 40px -24px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --red:#FF3B55; --red-deep:#E0223D; --red-soft:#3A1419;
+  --ink:#F4F2F3; --ink-2:#D2CED0; --muted:#A39EA1;
+  --ground:#121012; --surface:#1C191B; --line:#302C2E; --chip:#262224;
+  --on-red:#FFFFFF; --shadow:0 18px 40px -24px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:24px}
+@media (max-width:520px){.wrap{padding-inline:16px}}
+h1,h2,h3{text-wrap:balance;margin:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px;border-radius:8px}
+strong{font-weight:600}
+.hl{color:var(--red);font-weight:600}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+
+/* HERO */
+.hero{background:#D7132F;color:#fff;position:relative;overflow:hidden}
+.hero .wrap{padding-block:56px 48px;position:relative;z-index:1}
+.hero-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:13px}
+.brand{font-weight:800;font-size:22px;letter-spacing:-.02em}
+.brand small{display:block;font-size:10px;font-weight:600;letter-spacing:.22em;opacity:.85}
+.tag{border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:6px 14px;font-weight:500}
+.hero h1{font-size:clamp(34px,6vw,68px);line-height:1.02;font-weight:800;letter-spacing:-.035em;margin-top:44px;max-width:900px}
+.hero h1 span{font-weight:300;display:block}
+.hero p.lead{max-width:600px;font-size:17px;margin:20px 0 0;opacity:.95}
+.arc{position:absolute;right:-120px;top:-140px;width:520px;height:520px;border:70px solid rgba(255,255,255,.09);border-radius:50%;pointer-events:none}
+.arc.b{right:40px;top:120px;width:260px;height:260px;border-width:40px}
+.figs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:36px}
+.fig{background:rgba(255,255,255,.12);border-radius:14px;padding:16px 18px;transition:background .2s,transform .2s}
+.fig:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
+.fig b{display:block;font-size:clamp(22px,2.6vw,30px);font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.fig span{font-size:13px;line-height:1.35;display:block;opacity:.95}
+@media (max-width:860px){.figs{grid-template-columns:repeat(2,minmax(0,1fr))}.fig:last-child{grid-column:1/-1}}
+
+/* SECTIONS */
+section{padding-block:64px 8px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.sec-head h2{font-size:clamp(26px,3.4vw,38px);font-weight:700;letter-spacing:-.025em;margin-top:6px}
+.sec-head p{color:var(--muted);max-width:420px;margin:0;font-size:15px}
+
+/* STEPPER */
+.phases{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.phases span{display:inline-flex;align-items:center;gap:8px}
+.phases i{width:10px;height:10px;border-radius:50%;background:var(--red)}
+.phases i.o{background:transparent;border:2px solid var(--red)}
+.stepper-scroll{overflow-x:auto;padding-bottom:6px;margin-inline:-4px}
+.stepper{position:relative;display:grid;grid-template-columns:repeat(7,minmax(118px,1fr));min-width:840px;padding:0 4px}
+.track,.fill{position:absolute;left:calc(100%/14);right:calc(100%/14);top:27px;height:4px;border-radius:4px;background:var(--line)}
+.fill{background:var(--red);right:auto;width:0;transition:width .55s cubic-bezier(.2,.8,.2,1)}
+.step{position:relative;z-index:1;background:none;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:10px;padding:0 6px 8px;text-align:center}
+.dot{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:20px;background:var(--surface);border:3px solid var(--line);color:var(--muted);transition:all .3s cubic-bezier(.2,.8,.2,1)}
+.step.onb .dot{border-style:solid}
+.step:hover .dot{border-color:var(--red);color:var(--red);transform:scale(1.06)}
+.step.done .dot{background:var(--red-soft);border-color:var(--red);color:var(--red)}
+.step[aria-selected="true"] .dot{background:var(--red);border-color:var(--red);color:var(--on-red);transform:scale(1.12);box-shadow:0 0 0 8px color-mix(in srgb,var(--red) 18%,transparent)}
+.step .when{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--red)}
+.step .lbl{font-size:14px;font-weight:600;line-height:1.3;color:var(--ink-2)}
+.step[aria-selected="true"] .lbl{color:var(--ink)}
+
+/* PANEL */
+.panel{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+.panel-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:22px;align-items:center;padding:28px 32px;border-bottom:1px solid var(--line)}
+.bignum{font-size:72px;line-height:.8;font-weight:800;color:var(--red);letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.panel-head h3{font-size:clamp(22px,2.6vw,30px);font-weight:700;letter-spacing:-.02em}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.pill{font-size:12px;font-weight:600;padding:5px 11px;border-radius:999px;background:var(--chip);color:var(--ink-2)}
+.pill.actor{background:var(--red-soft);color:var(--red)}
+.nav{display:flex;gap:8px}
+.navbtn{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--surface);cursor:pointer;display:grid;place-items:center;transition:all .2s}
+.navbtn:hover:not(:disabled){background:var(--red);border-color:var(--red);color:var(--on-red)}
+.navbtn:disabled{opacity:.35;cursor:default}
+.navbtn svg{width:20px;height:20px}
+.panel-body{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.col{padding:26px 32px 30px;border-right:1px solid var(--line)}
+.col:last-child{border-right:0}
+.col h4{margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.col.rule{background:color-mix(in srgb,var(--red-soft) 55%,var(--surface))}
+.col.rule h4{color:var(--red)}
+.col ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+.col li{position:relative;padding-left:22px;font-size:15px;color:var(--ink-2)}
+.col li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:2px;background:var(--red);border-radius:2px}
+.arts{padding:14px 32px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.panel-anim{animation:rise .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes rise{from{opacity:.001;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (max-width:860px){
+  .panel-body{grid-template-columns:1fr}
+  .col{border-right:0;border-bottom:1px solid var(--line)}
+  .col:last-child{border-bottom:0}
+  .panel-head{grid-template-columns:auto minmax(0,1fr);padding:22px}
+  .nav{grid-column:1/-1}
+  .col{padding:22px}
+  .bignum{font-size:56px}
+}
+
+/* MONTH */
+.month{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:20px}
+.cal{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-top:16px}
+.day{height:46px;border-radius:10px;display:grid;place-items:center;font-size:13px;font-weight:500;color:var(--muted);background:var(--chip);font-variant-numeric:tabular-nums;border:0;cursor:default}
+.day.k{cursor:pointer;color:var(--ink)}
+.day.review{background:color-mix(in srgb,var(--red) 16%,var(--surface));color:var(--ink)}
+.day.inv,.day.pay,.day.end{background:var(--red);color:var(--on-red);font-weight:700}
+.day.on{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.legend button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s}
+.legend button[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.explain{background:var(--ink);color:var(--ground);border-radius:22px;padding:30px;display:flex;flex-direction:column;gap:14px}
+.explain .eyebrow{color:var(--red)}
+.explain h3{font-size:26px;font-weight:700;letter-spacing:-.02em}
+.explain p{margin:0;opacity:.88;font-size:15px}
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+.rule-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 22px}
+.rule-card h4{margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.rule-card.warn h4{color:var(--red)}
+.rule-card p{margin:0;font-size:15px;color:var(--ink-2)}
+@media (max-width:860px){.month,.rules{grid-template-columns:1fr}}
+
+/* CONTINU */
+.acc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.acc-item{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:border-color .2s}
+.acc-item:hover{border-color:color-mix(in srgb,var(--red) 50%,var(--line))}
+.acc-btn{width:100%;display:flex;align-items:center;gap:14px;padding:18px 20px;background:none;border:0;cursor:pointer;text-align:left}
+.acc-ico{width:40px;height:40px;border-radius:12px;background:var(--red-soft);color:var(--red);display:grid;place-items:center;flex-shrink:0}
+.acc-ico svg{width:20px;height:20px}
+.acc-btn strong{font-size:16px;flex:1}
+.acc-btn small{font-size:12px;color:var(--muted);white-space:nowrap}
+.chev{width:18px;height:18px;transition:transform .3s;color:var(--muted);flex-shrink:0}
+.acc-item.open .chev{transform:rotate(180deg)}
+.acc-body{padding:0 20px 20px 74px;color:var(--ink-2);font-size:15px}
+.acc-body ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px}
+@media (max-width:760px){.acc{grid-template-columns:1fr}.acc-body{padding-left:20px}}
+
+/* WARRANTY */
+.warr{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:28px 30px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:36px;margin-top:14px}
+.bars{display:flex;flex-direction:column;gap:14px;margin-top:18px}
+.bar-row{display:grid;grid-template-columns:190px minmax(0,1fr) 64px;gap:14px;align-items:center;font-size:14px}
+.bar{height:12px;border-radius:6px;background:var(--chip);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--red);border-radius:6px;width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.bar-row b{text-align:right;font-variant-numeric:tabular-nums;color:var(--red)}
+.axis{display:grid;grid-template-columns:190px minmax(0,1fr) 64px;gap:14px;font-size:11px;color:var(--muted)}
+.axis div{display:flex;justify-content:space-between}
+.warr ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:10px;font-size:15px;color:var(--ink-2)}
+@media (max-width:760px){.warr{grid-template-columns:1fr}.bar-row,.axis{grid-template-columns:120px minmax(0,1fr) 52px}}
+
+/* FOOT */
+footer{margin-top:64px;background:#141214;color:#F4F2F3}
+footer .wrap{padding-block:44px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px}
+footer h3{font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:#FF3B55;margin-bottom:14px}
+footer ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:14px;opacity:.9}
+footer p{margin:0 0 8px;font-size:14px;opacity:.85}
+.copy{border:1px solid rgba(255,255,255,.3);background:none;color:#fff;border-radius:999px;padding:6px 12px;font-size:12px;cursor:pointer;margin-left:6px}
+@media (max-width:760px){footer .wrap{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* MAQUETTE COSMI3D */
+.jump{display:inline-flex;align-items:center;gap:10px;margin-top:26px;background:#fff;color:#D7132F;font-weight:600;font-size:15px;padding:12px 20px;border-radius:999px;text-decoration:none;transition:transform .2s}
+.jump:hover{transform:translateY(-2px)}
+.mock-note{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--ground);border-radius:999px;padding:6px 12px}
+.mtabs{display:inline-flex;gap:4px;background:var(--chip);padding:5px;border-radius:999px;margin-bottom:20px;flex-wrap:wrap}
+.mtabs button{border:0;background:none;padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer;color:var(--ink-2)}
+.mtabs button[aria-selected="true"]{background:var(--red);color:var(--on-red)}
+.browser{background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
+.bar-top{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--chip)}
+.bar-top i{width:11px;height:11px;border-radius:50%;background:var(--line)}
+.url{flex:1;margin-left:10px;background:var(--surface);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.site-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 28px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:-.02em}
+.logo svg{width:30px;height:30px;color:var(--red)}
+.logo em{font-style:normal;color:var(--red)}
+.site-nav small{color:var(--muted);font-size:13px}
+.wiz{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:560px}
+.wiz-side{background:#D7132F;color:#fff;padding:28px 24px;display:flex;flex-direction:column;gap:6px}
+.wiz-side h4{margin:0 0 14px;font-size:18px;font-weight:700}
+.wstep{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;background:none;border:0;color:#fff;text-align:left;cursor:pointer;font-size:14px;font-weight:500;opacity:.75}
+.wstep b{width:28px;height:28px;border-radius:50%;border:2px solid rgba(255,255,255,.6);display:grid;place-items:center;font-size:13px;flex-shrink:0}
+.wstep[aria-current="step"]{background:rgba(255,255,255,.16);opacity:1}
+.wstep.ok{opacity:1}.wstep.ok b{background:#fff;color:#D7132F;border-color:#fff}
+.wiz-side .sum{margin-top:auto;background:rgba(0,0,0,.18);border-radius:14px;padding:16px;font-size:13px;line-height:1.5}
+.wiz-side .sum strong{font-size:26px;display:block;letter-spacing:-.02em}
+.wiz-main{padding:32px 36px;display:flex;flex-direction:column;gap:20px}
+.wiz-main h3{font-size:24px;font-weight:700;letter-spacing:-.02em}
+.wiz-main .sub{color:var(--muted);font-size:14px;margin:-10px 0 0}
+.wpane{display:flex;flex-direction:column;gap:18px}
+.mitem{display:flex;flex-direction:column;gap:14px}
+[hidden]{display:none!important}
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 18px}
+.fgrid .full{grid-column:1/-1}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:13px;font-weight:600;color:var(--ink-2)}
+.field input,.field select{font:inherit;font-size:15px;padding:11px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);width:100%}
+.field input:focus,.field select:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 4px color-mix(in srgb,var(--red) 15%,transparent)}
+.hint{font-size:12px;color:var(--muted)}
+.team-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.2fr) 40px;gap:10px;align-items:end}
+.icon-btn{width:40px;height:44px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;display:grid;place-items:center;color:var(--muted)}
+.icon-btn:hover{border-color:var(--red);color:var(--red)}
+.ghost{align-self:flex-start;border:1.5px dashed var(--line);background:none;border-radius:12px;padding:10px 16px;font-weight:600;font-size:14px;cursor:pointer;color:var(--red)}
+.paybox{border:1.5px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.pm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pm label{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;font-weight:600;font-size:14px}
+.pm input{accent-color:var(--red)}
+.pm label:has(input:checked){border-color:var(--red);background:color-mix(in srgb,var(--red-soft) 60%,var(--surface))}
+.secure{border-radius:12px;background:var(--chip);padding:16px;font-size:13px;color:var(--muted);display:flex;gap:12px;align-items:center}
+.secure svg{width:22px;height:22px;color:var(--red);flex-shrink:0}
+.verify{display:flex;gap:10px;align-items:center;font-size:14px;font-weight:600}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;border-radius:999px;padding:5px 10px;background:var(--chip);color:var(--muted)}
+.badge.ok{background:#E3F4E8;color:#1D6B35}
+:root[data-theme="dark"] .badge.ok{background:#173522;color:#7FD39A}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .badge.ok{background:#173522;color:#7FD39A}}
+.cal-pick{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+.calendly{border:1.5px solid var(--line);border-radius:16px;padding:16px}
+.calendly .hd{display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:14px;margin-bottom:12px}
+.dates{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.dates button,.slots button{border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 4px;font-size:13px;font-weight:600;cursor:pointer;line-height:1.25}
+.dates button span{display:block;font-size:11px;font-weight:500;color:var(--muted)}
+.dates button[aria-pressed="true"],.slots button[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:var(--on-red)}
+.dates button[aria-pressed="true"] span{color:var(--on-red)}
+.slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:12px}
+.trainer{display:flex;flex-direction:column;gap:10px}
+.trainer label{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;font-size:14px}
+.trainer label:has(input:checked){border-color:var(--red)}
+.trainer input{accent-color:var(--red);margin-top:4px}
+.trainer small{display:block;color:var(--muted);font-size:12px}
+.recap{border:1.5px solid var(--line);border-radius:16px;overflow:hidden}
+.recap div{display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid var(--line);font-size:14px}
+.recap div:last-child{border-bottom:0;background:var(--chip);font-weight:700}
+.recap span:first-child{color:var(--muted)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px}
+.check input{accent-color:var(--red);margin-top:4px;width:16px;height:16px;flex-shrink:0}
+.wiz-actions{display:flex;justify-content:space-between;gap:12px;margin-top:auto;padding-top:8px;flex-wrap:wrap}
+.btn{border:0;border-radius:999px;padding:13px 24px;font-weight:600;font-size:15px;cursor:pointer;transition:transform .15s,background .2s}
+.btn.primary{background:var(--red);color:var(--on-red)}
+.btn.primary:hover{background:var(--red-deep);transform:translateY(-1px)}
+.btn.primary:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn.sec{background:var(--chip);color:var(--ink)}
+.err{color:var(--red);font-size:13px;font-weight:500;min-height:1.2em}
+.done-box{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.done-box .big{width:64px;height:64px;border-radius:50%;background:var(--red);color:var(--on-red);display:grid;place-items:center}
+.done-box .big svg{width:30px;height:30px}
+@media (max-width:860px){.wiz{grid-template-columns:1fr}.wiz-side{flex-direction:row;flex-wrap:wrap}.wiz-side h4,.wiz-side .sum{width:100%}.wiz-main{padding:24px 20px}.fgrid,.cal-pick,.pm{grid-template-columns:1fr}.team-row{grid-template-columns:1fr 1fr}.team-row .field:nth-child(3){grid-column:1/-1}}
+
+/* EMAILS */
+.mail-wrap{display:grid;grid-template-columns:280px minmax(0,1fr);min-height:560px}
+.inbox{border-right:1px solid var(--line);display:flex;flex-direction:column}
+.inbox button{border:0;border-bottom:1px solid var(--line);background:none;text-align:left;padding:16px 18px;cursor:pointer;display:flex;flex-direction:column;gap:3px}
+.inbox button[aria-selected="true"]{background:color-mix(in srgb,var(--red-soft) 60%,var(--surface));box-shadow:inset 3px 0 0 var(--red)}
+.inbox b{font-size:13px}
+.inbox span{font-size:14px;font-weight:600;color:var(--ink)}
+.inbox small{font-size:12px;color:var(--muted)}
+.mail{padding:26px 30px;display:flex;flex-direction:column;gap:18px;background:var(--chip)}
+.mail-meta{font-size:13px;color:var(--muted);display:grid;gap:3px}
+.mail-meta strong{color:var(--ink)}
+.mail-subject{font-size:20px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+.email{max-width:600px;width:100%;margin:0 auto;background:#fff;color:#141214;border-radius:14px;overflow:hidden;border:1px solid #E6E3E4;font-size:15px;line-height:1.6}
+.email .eh{background:#D7132F;color:#fff;padding:22px 28px;display:flex;justify-content:space-between;align-items:center}
+.email .eh b{font-size:20px;font-weight:800;letter-spacing:-.02em}
+.email .eh small{font-size:11px;letter-spacing:.14em;font-weight:600}
+.email .eb{padding:28px;display:flex;flex-direction:column;gap:14px}
+.email h5{margin:0;font-size:22px;font-weight:700;letter-spacing:-.02em;color:#141214}
+.email p{margin:0;color:#3D3A3D}
+.email .box{background:#F6F5F5;border-radius:12px;padding:16px 18px;display:grid;gap:8px;font-size:14px}
+.email .box div{display:flex;justify-content:space-between;gap:12px}
+.email .box span:first-child{color:#6B676B}
+.email .box span:last-child{font-weight:600;text-align:right}
+.email .cta{align-self:flex-start;background:#D7132F;color:#fff;border-radius:999px;padding:12px 22px;font-weight:600;font-size:14px;text-decoration:none}
+.email .cta.alt{background:#141214}
+.email .row-cta{display:flex;gap:10px;flex-wrap:wrap}
+.email ol,.email ul{margin:0;padding-left:20px;color:#3D3A3D;display:grid;gap:6px}
+.email .faq{border-top:1px solid #E6E3E4;padding-top:14px;display:grid;gap:12px}
+.email .faq b{display:block;color:#141214;font-size:14px}
+.email .faq p{font-size:14px}
+.email .ef{background:#141214;color:#F4F2F3;padding:18px 28px;font-size:12px;line-height:1.6}
+.ph{background:#FFF3C4;color:#6A4B00;border-radius:4px;padding:0 4px;font-weight:600}
+@media (max-width:860px){.mail-wrap{grid-template-columns:1fr}.inbox{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line)}.inbox button{min-width:200px;border-bottom:0;border-right:1px solid var(--line)}.mail{padding:18px 12px}.email .eb{padding:20px}}
+</style>
+</head>
+<body>
+
+
+<header class="hero">
+  <div class="arc"></div><div class="arc b"></div>
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="brand">cosmilab<small>GUIDE INTERNE</small></div>
+      <div class="tag">Programme scanner Medit i900</div>
+    </div>
+    <h1><span>Le parcours d'un cabinet,</span>de la signature à la restitution</h1>
+    <p class="lead">Sept étapes, de l'inscription sur Cosmi3D au retour du matériel. Cliquez sur une étape pour voir qui fait quoi, et ce que dit le contrat.</p>
+    <a class="jump" href="#maquette">Voir la maquette du site Cosmi3D et des emails →</a>
+    <div class="figs">
+      <div class="fig"><b>$1,000</b><span>minimum de travaux par mois</span></div>
+      <div class="fig"><b>$400</b><span>frais d'activation non remboursables, payés à l'inscription</span></div>
+      <div class="fig"><b>1 mois</b><span>reconduit automatiquement</span></div>
+      <div class="fig"><b>10 jours</b><span>de préavis de résiliation</span></div>
+      <div class="fig"><b>$30,000</b><span>plafond en cas de non-restitution</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="parcours">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">La chronologie</div><h2>Étape par étape</h2></div>
+      <p>Utilisez les flèches du clavier ou les boutons pour passer d'une étape à l'autre.</p>
+    </div>
+    <div class="phases"><span><i></i>Onboarding sur Cosmi3D (1 à 5)</span><span><i class="o"></i>Vie du contrat (6 et 7)</span></div>
+    <div class="stepper-scroll">
+      <div class="stepper" role="tablist" aria-label="Étapes du parcours" id="stepper">
+        <div class="track"></div><div class="fill" id="fill"></div>
+      </div>
+    </div>
+    <div class="panel" id="panel" role="tabpanel" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="mois">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">Étape 6 en détail</div><h2>Le mois type d'un client actif</h2></div>
+      <p>Cliquez sur un jour marqué ou sur une légende.</p>
+    </div>
+    <div class="month">
+      <div class="cal">
+        <strong>Calendrier de facturation</strong>
+        <div class="cal-grid" id="cal"></div>
+        <div class="legend" id="legend"></div>
+      </div>
+      <div class="explain" id="explain"></div>
+    </div>
+    <div class="rules">
+      <div class="rule-card"><h4>Paiement</h4><p>Carte bancaire ou prélèvement ACH uniquement. Frais de carte jusqu'à <strong>2,9 %</strong>. Refusés : chèques, cartes prépayées, paiements entre particuliers, crypto.</p></div>
+      <div class="rule-card"><h4>Minimum</h4><p><span class="hl">$1,000</span> par période d'1 mois, dès le premier mois. La différence facturée si le minimum n'est pas atteint est <strong>non remboursable</strong> : ni avoir, ni acompte.</p></div>
+      <div class="rule-card warn"><h4>Suspension du compte</h4><p>Impayé depuis <span class="hl">60 jours ou plus</span>, ou montant dû de <span class="hl">$10,000 ou plus</span> : compte suspendu jusqu'au paiement complet.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="continu">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">En continu</div><h2>Pendant toute la durée du contrat</h2></div>
+      <p>Les règles qui s'appliquent à tout moment. Ouvrez une carte pour le détail.</p>
+    </div>
+    <div class="acc" id="acc"></div>
+    <div class="warr">
+      <div>
+        <div class="eyebrow">Art. 7</div>
+        <h3 style="font-size:22px;font-weight:700;margin-top:6px">Garantie des produits de laboratoire</h3>
+        <div class="bars" id="bars"></div>
+        <div class="axis" style="margin-top:6px"><span></span><div><span>0</span><span>1 an</span><span>2</span><span>3</span><span>4</span><span>5 ans</span></div><span></span></div>
+      </div>
+      <ul>
+        <li>Défaut de matériau ou de fabrication : Cosmilab <strong>répare ou remplace</strong> sans frais, après retour et examen du dispositif.</li>
+        <li>Les autres coûts d'ajustement, de réparation et de remplacement restent à la charge du cabinet.</li>
+        <li>Pas de garantie d'adaptation à un usage particulier ; si la loi l'impose, garantie implicite limitée à 90 jours après livraison.</li>
+        <li><span class="hl">Garantie caduque</span> sans entretien et contrôle réguliers par un professionnel dentaire qualifié.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="maquette">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">Maquette Cosmi3D</div><h2>Ce que voit le dentiste</h2></div>
+      <p><span class="mock-note">Exemple · aucune donnée envoyée</span><br>Le parcours d'inscription en 5 écrans, puis les 3 emails automatiques. Les zones surlignées en jaune sont à compléter.</p>
+    </div>
+    <div class="mtabs" role="tablist" aria-label="Maquette">
+      <button type="button" role="tab" id="mt-site" aria-selected="true" aria-controls="mp-site">Inscription en ligne</button>
+      <button type="button" role="tab" id="mt-mail" aria-selected="false" aria-controls="mp-mail">Emails automatiques</button>
+    </div>
+
+    <!-- SITE -->
+    <div id="mp-site" role="tabpanel" aria-labelledby="mt-site">
+      <div class="browser">
+        <div class="bar-top"><i></i><i></i><i></i><div class="url">cosmi3d.cosmilab.us/inscription <span class="ph">[URL à définir]</span></div></div>
+        <div class="site-nav">
+          <div class="logo"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M8 25a11 11 0 1 1 16 0"/><path d="M12 22c0-5 1.5-9 4-9s4 4 4 9"/></svg><span>cosmi<em>3D</em></span></div>
+          <small>Programme scanner Medit i900 · par Cosmilab</small>
+        </div>
+        <form class="wiz" id="wiz" novalidate>
+          <aside class="wiz-side">
+            <h4>Votre inscription</h4>
+            <button type="button" class="wstep" data-s="0"><b>1</b>Votre cabinet</button>
+            <button type="button" class="wstep" data-s="1"><b>2</b>Votre équipe</button>
+            <button type="button" class="wstep" data-s="2"><b>3</b>Moyen de paiement</button>
+            <button type="button" class="wstep" data-s="3"><b>4</b>Votre formation</button>
+            <button type="button" class="wstep" data-s="4"><b>5</b>Signature et activation</button>
+            <div class="sum"><strong>$400</strong>Frais d'activation, non remboursables. Puis au moins $1,000 de travaux de laboratoire par mois.</div>
+          </aside>
+          <div class="wiz-main">
+            <!-- 1 -->
+            <div class="wpane" data-p="0">
+              <h3>Votre cabinet</h3><p class="sub">Ces coordonnées figurent sur votre contrat.</p>
+              <div class="fgrid">
+                <div class="field"><label for="f-name">Nom et prénom</label><input id="f-name" value="Dr. Sarah Klein" required></div>
+                <div class="field"><label for="f-role">Fonction au sein du cabinet</label><select id="f-role"><option>Dentiste titulaire</option><option>Associé(e)</option><option>Office manager</option></select></div>
+                <div class="field"><label for="f-practice">Nom du cabinet</label><input id="f-practice" value="Harbor Smile Dental" required></div>
+                <div class="field"><label for="f-phone">Téléphone</label><input id="f-phone" type="tel" value="(914) 555-0142"></div>
+                <div class="field full"><label for="f-addr">Adresse du cabinet</label><input id="f-addr" value="120 Main Street, New Rochelle, NY 10801" required></div>
+                <div class="field full"><label for="f-email">Email de notification</label><input id="f-email" type="email" value="sarah@harborsmile.example" required><span class="hint">Toutes les notifications liées au contrat seront envoyées à cette adresse.</span></div>
+              </div>
+            </div>
+            <!-- 2 -->
+            <div class="wpane" data-p="1" hidden>
+              <h3>Votre équipe</h3><p class="sub">Toutes les personnes qui vont scanner doivent suivre la formation.</p>
+              <div id="team" style="display:flex;flex-direction:column;gap:12px"></div>
+              <button type="button" class="ghost" id="addMember">+ Ajouter une personne</button>
+            </div>
+            <!-- 3 -->
+            <div class="wpane" data-p="2" hidden>
+              <h3>Moyen de paiement</h3><p class="sub">Il sert aux $400 d'activation, puis aux prélèvements mensuels du 8.</p>
+              <div class="paybox">
+                <div class="pm">
+                  <label><input type="radio" name="pm" id="pm-ach" value="ach" checked> Prélèvement ACH</label>
+                  <label><input type="radio" name="pm" id="pm-card" value="card"> Carte bancaire (frais jusqu'à 2,9 %)</label>
+                </div>
+                <div class="secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Module de paiement sécurisé du prestataire <span class="ph">[prestataire à définir]</span>. Dans cette maquette, aucune coordonnée bancaire n'est saisie.</span></div>
+                <div class="verify"><button type="button" class="btn sec" id="verifyBtn">Vérifier le moyen de paiement</button><span class="badge" id="verifyBadge">Non vérifié</span></div>
+              </div>
+              <p class="hint">Refusés : chèques, cartes prépayées, paiements entre particuliers, crypto-monnaies.</p>
+            </div>
+            <!-- 4 -->
+            <div class="wpane" data-p="3" hidden>
+              <h3>Votre formation</h3><p class="sub">À réserver avant l'expédition du matériel. Vous pourrez la reprogrammer.</p>
+              <div class="cal-pick">
+                <div class="calendly">
+                  <div class="hd"><span>Choisissez une date</span><span class="badge">Calendly <span class="ph">[lien]</span></span></div>
+                  <div class="dates" id="dates"></div>
+                  <div class="slots" id="slots"></div>
+                </div>
+                <div class="trainer">
+                  <strong style="font-size:14px">Format</strong>
+                  <label><input type="radio" name="tr" value="Medit USA, en présentiel" checked><span>Medit USA, en présentiel<small>Au cabinet</small></span></label>
+                  <label><input type="radio" name="tr" value="Medit USA, à distance"><span>Medit USA, à distance<small>Visioconférence</small></span></label>
+                  <label><input type="radio" name="tr" value="Partenaire technique Cosmilab"><span>Partenaire technique Cosmilab<small><span class="ph">[nom du partenaire]</span></small></span></label>
+                </div>
+              </div>
+            </div>
+            <!-- 5 -->
+            <div class="wpane" data-p="4" hidden>
+              <h3>Signature et activation</h3><p class="sub">Vérifiez le récapitulatif avant de signer.</p>
+              <div class="recap" id="recap"></div>
+              <label class="check"><input type="checkbox" id="c1"> J'ai lu et j'accepte le contrat de mise à disposition de scanner, ainsi que les conditions générales, l'accord HIPAA (BAA) et la politique informatique en ligne.</label>
+              <label class="check"><input type="checkbox" id="c2"> J'autorise Cosmilab à prélever les $400 de frais d'activation, non remboursables, puis les factures mensuelles sur le moyen de paiement enregistré.</label>
+            </div>
+            <!-- done -->
+            <div class="wpane" data-p="5" hidden>
+              <div class="done-box">
+                <div class="big"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></div>
+                <h3>Bienvenue chez Cosmilab</h3>
+                <p style="margin:0;color:var(--ink-2)">Votre cabinet est maintenant <strong>client actif</strong>. Vous allez recevoir un email de confirmation avec le récapitulatif, votre formation et le suivi UPS de votre colis.</p>
+                <p class="hint">Maquette : rien n'a été signé ni prélevé.</p>
+                <button type="button" class="btn sec" id="seeMail">Voir l'email de confirmation</button>
+              </div>
+            </div>
+            <p class="err" id="err" role="alert"></p>
+            <div class="wiz-actions" id="actions">
+              <button type="button" class="btn sec" id="back">Retour</button>
+              <button type="submit" class="btn primary" id="nextBtn">Continuer</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- EMAILS -->
+    <div id="mp-mail" role="tabpanel" aria-labelledby="mt-mail" hidden>
+      <div class="browser">
+        <div class="mail-wrap">
+          <div class="inbox" role="tablist" aria-label="Emails">
+            <button type="button" role="tab" data-m="0" aria-selected="true"><b>Étape 3 · Expédition</b><span>Bienvenue, votre kit est en route</span><small>Juste après l'inscription</small></button>
+            <button type="button" role="tab" data-m="1" aria-selected="false"><b>Étape 4 · J-2</b><span>Tout est prêt pour votre formation ?</span><small>2 jours avant la formation</small></button>
+            <button type="button" role="tab" data-m="2" aria-selected="false"><b>Étape 5 · Jour J</b><span>Merci d'avoir suivi la formation</span><small>Après la formation</small></button>
+          </div>
+          <div class="mail">
+            <!-- mail 1 -->
+            <div class="mitem" data-mi="0">
+              <div class="mail-meta"><span>De : <strong>Cosmi3D par Cosmilab</strong> &lt;<span class="ph">[adresse d'envoi]</span>&gt;</span><span>À : <strong>[Email de notification du cabinet]</strong></span></div>
+              <div class="mail-subject">Bienvenue chez Cosmilab, votre kit est en route</div>
+              <div class="email">
+                <div class="eh"><b>cosmilab</b><small>COSMI3D</small></div>
+                <div class="eb">
+                  <h5>Bonjour <span class="ph">[Prénom]</span>, votre cabinet est activé</h5>
+                  <p>Merci pour votre confiance. Voici le récapitulatif de votre contrat et les prochaines étapes.</p>
+                  <div class="box">
+                    <div><span>Cabinet</span><span class="ph">[Nom du cabinet]</span></div>
+                    <div><span>Contrat signé le</span><span class="ph">[date]</span></div>
+                    <div><span>Frais d'activation</span><span>$400, payés</span></div>
+                    <div><span>Minimum mensuel</span><span>$1,000 de travaux</span></div>
+                    <div><span>Durée</span><span>1 mois, reconduit automatiquement</span></div>
+                  </div>
+                  <div class="box">
+                    <div><span>Formation</span><span class="ph">[date et heure]</span></div>
+                    <div><span>Formateur</span><span class="ph">[Medit USA / partenaire]</span></div>
+                    <div><span>Format</span><span class="ph">[présentiel / à distance]</span></div>
+                    <div><span>Suivi UPS</span><span class="ph">[numéro de suivi]</span></div>
+                  </div>
+                  <p><strong>Avant la formation</strong>, dès réception du colis :</p>
+                  <ol><li>Déballez le scanner Medit i900 et l'ordinateur.</li><li>Branchez et chargez le matériel.</li><li>Suivez le tutoriel d'installation.</li></ol>
+                  <div class="row-cta"><a class="cta" href="#maquette">Voir le tutoriel d'installation</a><a class="cta alt" href="#maquette">Suivre mon colis</a></div>
+                  <p style="font-size:13px;color:#6B676B">Votre contrat complet est joint à cet email. Liens du tutoriel et du suivi : <span class="ph">[à compléter]</span></p>
+                </div>
+                <div class="ef">COSMILAB US INC. · 1297 North Avenue, New Rochelle, NY 10804 · info@cosmilab.us · 914 901 3901</div>
+              </div>
+            </div>
+            <!-- mail 2 -->
+            <div class="mitem" data-mi="1" hidden>
+              <div class="mail-meta"><span>De : <strong>Cosmi3D par Cosmilab</strong> &lt;<span class="ph">[adresse d'envoi]</span>&gt;</span><span>À : <strong>[Email de notification du cabinet]</strong></span></div>
+              <div class="mail-subject">Votre formation a lieu dans 2 jours : tout est prêt ?</div>
+              <div class="email">
+                <div class="eh"><b>cosmilab</b><small>COSMI3D</small></div>
+                <div class="eb">
+                  <h5>Plus que 2 jours, <span class="ph">[Prénom]</span></h5>
+                  <p>Votre formation est prévue le <span class="ph">[date et heure]</span> avec <span class="ph">[formateur]</span>. Pour qu'elle se passe bien, vérifiez ces trois points :</p>
+                  <ul><li>Le colis est bien <strong>reçu</strong>.</li><li>Le scanner et l'ordinateur sont <strong>chargés et montés</strong>.</li><li>Toute l'équipe qui va scanner est <strong>disponible</strong> à l'heure prévue.</li></ul>
+                  <div class="row-cta"><a class="cta" href="#maquette">Oui, tout est prêt</a><a class="cta alt" href="#maquette">Reprogrammer ma formation</a></div>
+                  <p style="font-size:13px;color:#6B676B">Un problème avec le colis ? Répondez à cet email ou appelez le 914 901 3901. Relance si pas de réponse : <span class="ph">[délai à définir]</span></p>
+                </div>
+                <div class="ef">COSMILAB US INC. · 1297 North Avenue, New Rochelle, NY 10804 · info@cosmilab.us · 914 901 3901</div>
+              </div>
+            </div>
+            <!-- mail 3 -->
+            <div class="mitem" data-mi="2" hidden>
+              <div class="mail-meta"><span>De : <strong>Cosmi3D par Cosmilab</strong> &lt;<span class="ph">[adresse d'envoi]</span>&gt;</span><span>À : <strong>[Email de notification du cabinet]</strong></span></div>
+              <div class="mail-subject">Merci d'avoir suivi la formation Cosmilab</div>
+              <div class="email">
+                <div class="eh"><b>cosmilab</b><small>COSMI3D</small></div>
+                <div class="eb">
+                  <h5>Vous êtes prêts à scanner</h5>
+                  <p>Merci, <span class="ph">[Prénom]</span>, à vous et à votre équipe d'avoir suivi la formation. Vous pouvez maintenant envoyer vos premiers cas via Cosmi3D.</p>
+                  <div class="box">
+                    <div><span>Support technique</span><span class="ph">[email support]</span></div>
+                    <div><span>Téléphone</span><span>914 901 3901</span></div>
+                    <div><span>Horaires</span><span class="ph">[horaires]</span></div>
+                  </div>
+                  <div class="faq">
+                    <strong style="font-size:15px">Questions fréquentes <span class="ph">[exemples à valider]</span></strong>
+                    <div><b>Comment envoyer mon premier cas ?</b><p>Scannez avec le Medit i900, puis passez la commande dans Cosmi3D.</p></div>
+                    <div><b>Quand suis-je facturé ?</b><p>Le 1er du mois pour les commandes du mois précédent. Vous avez 7 jours pour vérifier, puis le prélèvement a lieu le 8.</p></div>
+                    <div><b>Où acheter des embouts de scanner ?</b><p>Chez Cosmilab ou chez un revendeur Medit agréé, uniquement des embouts approuvés par Medit.</p></div>
+                    <div><b>Un nouveau collaborateur doit scanner ?</b><p>Il doit d'abord être formé : contactez-nous pour réserver une session.</p></div>
+                  </div>
+                  <a class="cta" href="#maquette">Ouvrir Cosmi3D</a>
+                </div>
+                <div class="ef">COSMILAB US INC. · 1297 North Avenue, New Rochelle, NY 10804 · info@cosmilab.us · 914 901 3901</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h3>Encore à compléter</h3>
+      <ul>
+        <li>Lien Calendly, tutoriel d'installation, FAQ et délai de relance</li>
+        <li>Cosmi3D : URL du site, adresse d'envoi des emails, prestataire de paiement, horaires du support</li>
+        <li>Adresse définitive des conditions générales en ligne (cosmilab.us)</li>
+        <li>Validation par un avocat américain : prêt du matériel, affectation des $100 à la taxe sur les ventes, exclusivité, prélèvements</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Source</h3>
+      <p>Contrat scanner, version de travail française v8. Le contrat signé par les cabinets est la version anglaise : c'est elle qui fait foi.</p>
+      <p><span id="mail">info@cosmilab.us</span><button class="copy" id="copyMail" type="button">Copier</button></p>
+      <p>914 901 3901</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const R = s => `<span class="hl">${s}</span>`;
+const STEPS = [
+ {when:"J0", lbl:"Inscription & signature", title:"Inscription et signature digitale", where:"Sur le site Cosmi3D", actor:"Le dentiste", arts:"Art. 2 · 3 · 10 · 13 · Signatures",
+  cols:[["Le dentiste renseigne",["Ses coordonnées et celles du cabinet : nom, fonction, adresse, email de notification","Son <strong>équipe</strong> : toutes les personnes qui vont scanner","Son <strong>autorisation de prélèvement</strong> (carte ou ACH), dont Cosmi3D vérifie qu'elle fonctionne"]],
+        ["Il valide",["Signe le contrat <strong>en ligne</strong> et reconnaît les conditions générales, le BAA HIPAA et la politique IT","Réserve sa <strong>formation</strong> via le lien Calendly","Paie les "+R("$400 de frais d'activation")]],
+        ["Règle",[R("Tant que les $400 ne sont pas payés, rien n'est expédié"),"Les $400 ne sont <strong>pas remboursables</strong>, même en cas d'annulation avant expédition","Ils ne comptent pas dans le minimum mensuel de $1,000"],1]]},
+ {when:"Paiement reçu", lbl:"Client actif", title:"Le cabinet devient client actif", where:"Compte activé", actor:"Cosmi3D", arts:"Art. 3 · 4 · 5 · 8",
+  cols:[["Ce qui démarre",["Le contrat court par <strong>périodes d'1 mois</strong>, reconduites automatiquement","Minimum de "+R("$1,000")+" de travaux de laboratoire par période"]],
+        ["Le matériel",["Reste la <strong>propriété de Cosmilab</strong> et ne quitte pas le cabinet","Le cabinet en a la garde, l'entretient et assume le risque de perte","Connexion <strong>internet haut débit</strong> obligatoire","Taxe sur les ventes : <strong>$100</strong> du minimum affectés au matériel"]],
+        ["Exclusivité",["Le scanner sert <strong>uniquement</strong> aux commandes Cosmilab via Cosmi3D","Empreintes physiques vers d'autres labos : autorisées"]]]},
+ {when:"Expédition", lbl:"Confirmation & envoi", title:"Email de confirmation et envoi du kit", where:"Email automatique Cosmi3D", actor:"Cosmi3D", arts:"Art. 5 · Ce que Cosmilab fournit",
+  cols:[["L'email contient",["Le récapitulatif du contrat signé","La <strong>date de formation</strong> et le nom du formateur","L'<strong>étiquette de suivi UPS</strong> du colis","Le <strong>tutoriel d'installation</strong> à suivre avant la formation"]],
+        ["Le colis contient",["Scanner <strong>Medit i900</strong>, configuré","<strong>Ordinateur portable</strong> à usage exclusif de Cosmi3D","<strong>Chariot</strong> si demandé et disponible ("+R("$300")+", non remboursables)"]],
+        ["Formateur",["<strong>Medit USA</strong>, en présentiel ou à distance","ou le <strong>partenaire technique de Cosmilab</strong>"]]]},
+ {when:"J-2", lbl:"Relance avant formation", title:"Relance et vérification", where:"2 jours avant la formation", actor:"Cosmi3D", arts:"Art. 10",
+  cols:[["Email de relance",["Le colis est-il bien <strong>reçu</strong> ?","Le matériel est-il <strong>chargé et monté</strong> ?","Tout est-il prêt pour la formation ?"]],
+        ["Le client",["<strong>Confirme</strong> que tout est prêt","ou <strong>reprogramme</strong> sa formation via Calendly"]],
+        ["À définir",["Relance si le client ne répond pas [délai à définir]"],1]]},
+ {when:"Jour J", lbl:"Formation & remerciement", title:"Formation et email de remerciement", where:"Formation, puis email", actor:"Formateur puis Cosmi3D", arts:"Art. 5 · 10",
+  cols:[["La formation",["<strong>Toute personne qui scanne</strong> est formée avant d'utiliser le scanner","… et avant d'en parler aux patients"]],
+        ["L'email de remerciement",["Merci d'avoir suivi la formation","Les <strong>coordonnées du support technique</strong>","Quelques questions fréquentes [FAQ à rédiger]"]],
+        ["Ensuite",["Support technique et <strong>maintenance logicielle</strong> inclus pendant tout le contrat"]]]},
+ {when:"Chaque mois", lbl:"Cycle mensuel", title:"Le cycle mensuel de facturation", where:"Reconduction automatique", actor:"Cosmilab", arts:"Art. 1 · 3 · 4",
+  cols:[["Le calendrier",["Le <strong>1er</strong> : facture des commandes du mois précédent","Du <strong>1er au 7</strong> : le cabinet vérifie sa facture","Le <strong>8</strong> : prélèvement automatique"]],
+        ["Minimum",["Au moins "+R("$1,000")+" par période, dès le premier mois","Sinon, la différence est facturée et <strong>non remboursable</strong>"]],
+        ["Suspension",["Impayé depuis "+R("60 jours ou plus"),"ou montant dû de "+R("$10,000 ou plus")],1]], link:"#mois"},
+ {when:"Fin du contrat", lbl:"Résiliation & retour", title:"Résiliation et restitution du matériel", where:"À tout moment", actor:"Les deux parties", arts:"Art. 9",
+  cols:[["Résilier",["Le cabinet <strong>ou</strong> Cosmilab, à tout moment","Préavis "+R("écrit de 10 jours"),"Restent dus : <strong>commandes en cours</strong> et <strong>minimum du mois</strong>"]],
+        ["Restituer",["Cosmilab envoie <strong>étiquettes et carton</strong> gratuitement","Le cabinet a "+R("30 jours")+" après réception de l'étiquette pour programmer l'enlèvement"]],
+        ["Si le matériel n'est pas rendu",["Cosmilab prélève la valeur de détail, "+R("jusqu'à $30,000"),"Prélèvement refusé ou partiel : le solde reste immédiatement exigible","Rendu en bon état <strong>dans les 60 jours</strong> : remboursement, moins les frais de pièces et frais engagés"],1]]}
+];
+
+const stepper=document.getElementById('stepper'), panel=document.getElementById('panel'), fill=document.getElementById('fill');
+let cur=0; const btns=[];
+STEPS.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.className='step'+(i<5?' onb':''); b.type='button'; b.id='tab-'+i;
+  b.setAttribute('role','tab'); b.setAttribute('aria-controls','panel');
+  b.innerHTML=`<span class="dot">${i+1}</span><span class="when">${s.when}</span><span class="lbl">${s.lbl}</span>`;
+  b.addEventListener('click',()=>go(i));
+  b.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'){e.preventDefault();go(Math.min(cur+1,6),true)}
+    if(e.key==='ArrowLeft'){e.preventDefault();go(Math.max(cur-1,0),true)}
+  });
+  stepper.appendChild(b); btns.push(b);
+});
+const arrow=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
+function go(i,focus){
+  cur=i;
+  btns.forEach((b,j)=>{b.setAttribute('aria-selected',j===i);b.tabIndex=j===i?0:-1;b.classList.toggle('done',j<i)});
+  if(focus) btns[i].focus();
+  fill.style.width=`calc((100% - 100%/7) * ${i/6})`;
+  const s=STEPS[i];
+  panel.setAttribute('aria-labelledby','tab-'+i);
+  panel.innerHTML=`<div class="panel-anim">
+   <div class="panel-head">
+     <div class="bignum">${String(i+1).padStart(2,'0')}</div>
+     <div><h3>${s.title}</h3><div class="meta"><span class="pill actor">${s.actor}</span><span class="pill">${s.when}</span><span class="pill">${s.where}</span></div></div>
+     <div class="nav">
+       <button class="navbtn" type="button" id="prev" aria-label="Étape précédente" ${i===0?'disabled':''}>${arrow('M15 18l-6-6 6-6')}</button>
+       <button class="navbtn" type="button" id="next" aria-label="Étape suivante" ${i===6?'disabled':''}>${arrow('M9 6l6 6-6 6')}</button>
+     </div>
+   </div>
+   <div class="panel-body">${s.cols.map(c=>`<div class="col${c[2]?' rule':''}"><h4>${c[0]}</h4><ul>${c[1].map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('')}</div>
+   <div class="arts"><span>${s.arts}</span>${s.link?'<a href="'+s.link+'" style="color:var(--red);font-weight:600">Voir le mois type en détail</a>':'<span>Étape '+(i+1)+' sur 7</span>'}</div>
+  </div>`;
+  document.getElementById('prev').onclick=()=>go(Math.max(cur-1,0));
+  document.getElementById('next').onclick=()=>go(Math.min(cur+1,6));
+  try{ history.replaceState(null,'','#etape-'+(i+1)); }catch(e){}
+}
+const m=(location.hash||'').match(/^#etape-([1-7])$/);
+go(m?+m[1]-1:0);
+
+/* Month calendar */
+const EV={
+ inv:{d:[1],label:"Le 1er : facture",title:"Facture mensuelle",text:"Cosmilab émet une facture pour toutes les commandes passées le mois précédent."},
+ review:{d:[1,2,3,4,5,6,7],label:"Du 1er au 7 : vérification",title:"7 jours pour vérifier",text:"Le cabinet a sept jours calendaires pour vérifier sa facture et signaler une erreur."},
+ pay:{d:[8],label:"Le 8 : prélèvement",title:"Prélèvement automatique",text:"Cosmilab prélève le moyen de paiement enregistré (carte ou ACH). Frais de carte jusqu'à 2,9 %."},
+ end:{d:[30],label:"Fin de période : minimum",title:"Contrôle du minimum",text:"Si les commandes de la période sont inférieures à $1,000, Cosmilab facture la différence. Ce solde est non remboursable, ni avoir ni acompte."}
+};
+const cal=document.getElementById('cal'), legend=document.getElementById('legend'), explain=document.getElementById('explain');
+const dayBtns={};
+for(let d=1;d<=30;d++){
+  const keys=Object.keys(EV).filter(k=>EV[k].d.includes(d));
+  const el=document.createElement(keys.length?'button':'div');
+  el.className='day'+(keys.length?' k':'');
+  if(d===1)el.classList.add('inv'); else if(d===8)el.classList.add('pay'); else if(d===30)el.classList.add('end'); else if(d<=7)el.classList.add('review');
+  el.textContent=d;
+  if(keys.length){el.type='button';const key=d===1?'inv':d===8?'pay':d===30?'end':'review';el.setAttribute('aria-label','Jour '+d+' : '+EV[key].label);el.onclick=()=>pick(key);}
+  cal.appendChild(el); dayBtns[d]=el;
+}
+const legBtns={};
+Object.entries(EV).forEach(([k,v])=>{const b=document.createElement('button');b.type='button';b.textContent=v.label;b.onclick=()=>pick(k);legend.appendChild(b);legBtns[k]=b;});
+function pick(k){
+  Object.values(dayBtns).forEach(e=>e.classList.remove('on'));
+  EV[k].d.forEach(d=>dayBtns[d].classList.add('on'));
+  Object.entries(legBtns).forEach(([kk,b])=>b.setAttribute('aria-pressed',kk===k));
+  explain.innerHTML=`<div class="eyebrow">${EV[k].label}</div><h3>${EV[k].title}</h3><p>${EV[k].text}</p><p style="margin-top:auto;font-size:13px;opacity:.7">Période d'1 mois, reconduite automatiquement. Exemple sur un mois de 30 jours.</p>`;
+}
+pick('inv');
+
+/* Accordion */
+const ICO={
+ tool:'M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z',
+ alert:'M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z',
+ tip:'M9 2h6v6l3 12H6L9 8z',
+ key:'M15 7a4 4 0 1 1-3.9 5H4v4H2v-6h9.1A4 4 0 0 1 15 7z',
+ shield:'M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5z',
+ chat:'M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z'
+};
+const ACC=[
+ ["tool","Assistance","Art. 5",["Support technique et <strong>maintenance logicielle</strong> inclus pendant toute la durée du contrat."]],
+ ["alert","Dommage au matériel","Art. 5",["Mauvaise utilisation : Cosmilab facture le "+R("coût réel, sans plafond")+" (pièces, main-d'œuvre, expédition).","<strong>Prélevé</strong> sur le moyen de paiement, après envoi de la facture et du justificatif."]],
+ ["tip","Embouts de scanner","Art. 5",["Achetés chez Cosmilab ou chez un revendeur Medit agréé.","Uniquement des embouts <strong>approuvés par Medit</strong>."]],
+ ["key","Changement de contrôle","Art. 11",["Le cabinet informe Cosmilab <strong>par écrit sous 5 jours ouvrés</strong> en cas de changement de contrôle capitalistique."]],
+ ["shield","Responsabilité clinique","Art. 12",["Le cabinet est <strong>seul responsable</strong> du traitement et de l'information des patients.","Aucune déclaration ni garantie aux patients sur les Offres Cosmilab.","Respect des lois de l'État sur les scans intra-oraux ; offres fournies « en l'état »."]],
+ ["chat","Retours du cabinet","Engagements",["Retours actifs sur les préférences d'ajustement et d'esthétique, pour la meilleure expérience patient."]]
+];
+const acc=document.getElementById('acc');
+ACC.forEach(([ic,t,a,items],i)=>{
+  const it=document.createElement('div'); it.className='acc-item'+(i<2?' open':'');
+  it.innerHTML=`<button class="acc-btn" type="button" id="acc-${i}" aria-expanded="${i<2}" aria-controls="accb-${i}">
+    <span class="acc-ico">${`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${ICO[ic]}"/></svg>`}</span>
+    <strong>${t}</strong><small>${a}</small>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button>
+    <div class="acc-body" id="accb-${i}" ${i<2?'':'hidden'}><ul>${items.map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
+  const btn=it.querySelector('.acc-btn'), body=it.querySelector('.acc-body');
+  btn.onclick=()=>{const o=body.hidden; body.hidden=!o; it.classList.toggle('open',o); btn.setAttribute('aria-expanded',o);};
+  acc.appendChild(it);
+});
+
+/* Warranty bars (scale 0-5 years) */
+const W=[["Restaurations fixes",5,"5 ans"],["Inlays / onlays",3,"3 ans"],["Couronnes provisoires",0,"Aucune"],["Restaurations amovibles",3,"3 ans"],["Piliers sur mesure (Cosmilab)",5,"5 ans"],["Gouttières et protections",0.5,"6 mois"]];
+const bars=document.getElementById('bars');
+W.forEach(([n,y,l])=>{const r=document.createElement('div');r.className='bar-row';r.innerHTML=`<span>${n}</span><div class="bar"><i data-w="${y/5*100}"></i></div><b>${l}</b>`;bars.appendChild(r);});
+requestAnimationFrame(()=>requestAnimationFrame(()=>bars.querySelectorAll('i').forEach(i=>i.style.width=i.dataset.w+'%')));
+
+/* copy */
+document.getElementById('copyMail').onclick=async e=>{
+  const b=e.currentTarget;
+  try{await navigator.clipboard.writeText('info@cosmilab.us');b.textContent='Copié';}
+  catch(err){const r=document.createRange();r.selectNodeContents(document.getElementById('mail'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Sélectionné';}
+  setTimeout(()=>b.textContent='Copier',1800);
+};
+
+/* ===== Maquette Cosmi3D ===== */
+(function(){
+  const tabs=[['mt-site','mp-site'],['mt-mail','mp-mail']];
+  function showTab(id){tabs.forEach(([t,p])=>{const on=t===id;document.getElementById(t).setAttribute('aria-selected',on);document.getElementById(p).hidden=!on;});}
+  tabs.forEach(([t])=>document.getElementById(t).addEventListener('click',()=>showTab(t)));
+
+  /* team */
+  const team=document.getElementById('team'); let tid=0;
+  function addMember(n='',r='Assistant(e) dentaire',e=''){
+    const i=tid++; const row=document.createElement('div'); row.className='team-row';
+    row.innerHTML=`<div class="field"><label for="tm-n-${i}">Nom</label><input id="tm-n-${i}" value="${n}"></div>
+      <div class="field"><label for="tm-r-${i}">Rôle</label><select id="tm-r-${i}"><option>Dentiste</option><option>Hygiéniste</option><option>Assistant(e) dentaire</option><option>Autre</option></select></div>
+      <div class="field"><label for="tm-e-${i}">Email</label><input id="tm-e-${i}" type="email" value="${e}"></div>
+      <button type="button" class="icon-btn" aria-label="Retirer cette personne"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`;
+    row.querySelector('select').value=r;
+    row.querySelector('.icon-btn').onclick=()=>{ if(team.children.length>1) row.remove(); };
+    team.appendChild(row);
+  }
+  addMember('Dr. Sarah Klein','Dentiste','sarah@harborsmile.example');
+  addMember('Maria Lopez','Assistant(e) dentaire','maria@harborsmile.example');
+  document.getElementById('addMember').onclick=()=>addMember();
+
+  /* payment verify */
+  let verified=false; const vb=document.getElementById('verifyBadge');
+  document.getElementById('verifyBtn').onclick=e=>{
+    e.currentTarget.textContent='Vérification…';
+    setTimeout(()=>{verified=true;vb.className='badge ok';vb.textContent='Vérifié (exemple)';document.getElementById('verifyBtn').textContent='Vérifier à nouveau';},700);
+  };
+  document.querySelectorAll('input[name="pm"]').forEach(r=>r.onchange=()=>{verified=false;vb.className='badge';vb.textContent='Non vérifié';});
+
+  /* calendly mock */
+  const dates=document.getElementById('dates'), slots=document.getElementById('slots');
+  const JOURS=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'], MOIS=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+  let pickDate=null, pickSlot=null; const list=[]; const d=new Date(); d.setDate(d.getDate()+5);
+  while(list.length<5){ if(d.getDay()%6!==0) list.push(new Date(d)); d.setDate(d.getDate()+1); }
+  const fmt=x=>`${JOURS[x.getDay()]} ${x.getDate()} ${MOIS[x.getMonth()]}`;
+  list.forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.innerHTML=`${x.getDate()}<span>${JOURS[x.getDay()]}</span>`;b.setAttribute('aria-label',fmt(x));b.onclick=()=>{pickDate=fmt(x);[...dates.children].forEach(c=>c.setAttribute('aria-pressed',c===b));};dates.appendChild(b);});
+  ['9:00','11:00','14:00','16:00','17:30','18:30'].forEach(t=>{const b=document.createElement('button');b.type='button';b.textContent=t;b.onclick=()=>{pickSlot=t;[...slots.children].forEach(c=>c.setAttribute('aria-pressed',c===b));};slots.appendChild(b);});
+  dates.children[1].click(); slots.children[2].click();
+
+  /* wizard */
+  const panes=[...document.querySelectorAll('.wpane')], steps=[...document.querySelectorAll('.wstep')];
+  const err=document.getElementById('err'), nextBtn=document.getElementById('nextBtn'), back=document.getElementById('back'), actions=document.getElementById('actions');
+  let s=0, maxS=0;
+  const val=id=>document.getElementById(id).value.trim();
+  function check(i){
+    if(i===0){ if(!val('f-name')||!val('f-practice')||!val('f-addr')) return 'Complétez le nom, le cabinet et l\'adresse.'; if(!/^\S+@\S+\.\S+$/.test(val('f-email'))) return 'Indiquez un email de notification valide.'; }
+    if(i===1){ const ok=[...team.querySelectorAll('input[id^="tm-n-"]')].some(x=>x.value.trim()); if(!ok) return 'Ajoutez au moins une personne qui va scanner.'; }
+    if(i===2 && !verified) return 'Vérifiez le moyen de paiement avant de continuer.';
+    if(i===3 && (!pickDate||!pickSlot)) return 'Choisissez une date et un horaire de formation.';
+    if(i===4 && !(document.getElementById('c1').checked && document.getElementById('c2').checked)) return 'Cochez les deux cases pour signer.';
+    return '';
+  }
+  function recap(){
+    const pm=document.querySelector('input[name="pm"]:checked').value==='ach'?'Prélèvement ACH':'Carte bancaire';
+    const tr=document.querySelector('input[name="tr"]:checked').value;
+    const n=[...team.querySelectorAll('input[id^="tm-n-"]')].filter(x=>x.value.trim()).length;
+    const rows=[['Cabinet',val('f-practice')],['Signataire',val('f-name')],['Équipe à former',n+' personne'+(n>1?'s':'')],['Moyen de paiement',pm+' · vérifié'],['Formation',pickDate+' à '+pickSlot],['Formateur',tr],['Minimum mensuel','$1,000 de travaux'],['À payer maintenant','$400 (non remboursables)']];
+    document.getElementById('recap').innerHTML=rows.map(r=>`<div><span>${r[0]}</span><span>${r[1].replace(/[<>&]/g,'')}</span></div>`).join('');
+  }
+  function show(i){
+    s=i; maxS=Math.max(maxS,i);
+    panes.forEach(p=>p.hidden=+p.dataset.p!==i);
+    steps.forEach((b,j)=>{b.toggleAttribute('aria-current',j===i); if(j===i)b.setAttribute('aria-current','step'); b.classList.toggle('ok',j<i||i===5);});
+    err.textContent=''; actions.hidden=i===5; back.style.visibility=i===0?'hidden':'visible';
+    nextBtn.textContent=i===4?'Signer et payer $400':'Continuer';
+    if(i===4) recap();
+  }
+  document.getElementById('wiz').addEventListener('submit',e=>{
+    e.preventDefault(); const m=check(s); if(m){err.textContent=m;return;} show(s+1);
+  });
+  back.onclick=()=>show(Math.max(0,s-1));
+  steps.forEach((b,j)=>b.onclick=()=>{ if(j<=maxS && s!==5) show(j); });
+  document.getElementById('seeMail').onclick=()=>{showTab('mt-mail');pickMail(0);document.getElementById('mp-mail').scrollIntoView({behavior:'smooth',block:'start'});};
+  show(0);
+
+  /* inbox */
+  const inbox=[...document.querySelectorAll('.inbox button')], mails=[...document.querySelectorAll('.mitem')];
+  function pickMail(i){inbox.forEach((b,j)=>b.setAttribute('aria-selected',j===i));mails.forEach((m,j)=>m.hidden=j!==i);}
+  inbox.forEach((b,i)=>b.onclick=()=>pickMail(i));
+  document.querySelectorAll('.email a.cta').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
+})();
+</script>
+
+</body>
+</html>
