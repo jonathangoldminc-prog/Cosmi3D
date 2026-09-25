@@ -1316,6 +1316,19 @@ img,svg,canvas{max-width:100%}
 .iared .ia-verdict{background:#fff;color:#C8102E;opacity:.18}
 .iared .ia-verdict.on{opacity:1}
 .es-item,.es-mdots button{cursor:pointer}.es-item:not(.on):hover .es-t{color:#fff}
+/* v34: fix grid overflow on mobile (images forcing min-content width) */
+@media (max-width:900px){
+ .topic .t-grid,.labo-grid,.app-grid{grid-template-columns:minmax(0,1fr)!important}
+ .topic .t-grid>*,.labo-grid>*{min-width:0}
+ #smile .ia-card{padding:16px}
+ #smile .cmpx{max-width:460px;margin-inline:auto;width:100%}
+}
+.cmpx-layer img{max-width:none}
+/* v35: shorter hero */
+.hero.hero-red.hero-c{padding-block:64px 56px}
+.hero-c .fine{margin-top:18px}
+.eco3{padding-top:64px}
+@media (max-width:700px){.hero.hero-red.hero-c{padding-block:40px 40px}.eco3{padding-top:44px}}
 </style>
 
 
@@ -1338,7 +1351,6 @@ img,svg,canvas{max-width:100%}
       <div class="lc">l'écosystème numérique des dentistes</div>
       <h1><span class="word" style="animation-delay:0s">Scannez,</span><br><span class="word red" style="animation-delay:.08s">on</span> <span class="word red" style="animation-delay:.14s">s'occupe</span> <span class="word red" style="animation-delay:.2s">du</span> <span class="word red" style="animation-delay:.26s">reste.</span></h1>
       <p class="sub">Tout votre flux numérique, du scan à la couronne, dans un seul écosystème. Avec votre scanner, ou le nôtre.</p>
-      <div class="btns"><a class="btn red" href="#fit">Découvrez si Cosmi3D est fait pour vous</a><a class="btn soft" href="#eco3">Explorer l'écosystème</a></div>
       <p class="fine">Compatible avec tous les scanners · sans engagement</p>
     </div>
   </section>
@@ -1346,7 +1358,6 @@ img,svg,canvas{max-width:100%}
   <section class="eco3" id="eco3">
   <div class="wrap">
     <div class="es-hd">
-      <div class="eyebrow" style="color:var(--red)">L'écosystème Cosmi3D</div>
       <h2>Avec Cosmi3D, notre révolution<br><span class="red">devient la vôtre.</span></h2>
       <p>Un écosystème 360° digital pour vos cas numériques, pensé pour que vous vous concentriez sur vos patients.</p>
     </div>
@@ -2025,7 +2036,7 @@ function finish(){
   })();
   // compare slider
   const range=document.getElementById('cmpxRange'), after=document.getElementById('cmpxAfter'), handle=document.getElementById('cmpxHandle');
-  function setPos(v){after.style.clipPath=`inset(0 ${100-v}% 0 0)`;handle.style.left=v+'%';}
+  function setPos(v){after.style.clipPath=`inset(0 ${100-v}% 0 0)`;handle.style.left=Math.min(96,Math.max(4,v))+'%';}
   let auto=!reduce, t0=performance.now();
   range.addEventListener('input',()=>{auto=false;setPos(+range.value);});
   range.addEventListener('pointerdown',()=>{auto=false;});
