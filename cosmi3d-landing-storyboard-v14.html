@@ -2123,6 +2123,11 @@ body[data-hd="scan"] .chd{background:rgba(42,42,45,.86);box-shadow:0 1px 0 rgba(
   .s5-notes{display:block}
 }
 @media (max-width:950px) and (max-height:500px) and (orientation:landscape){.s5-ann text,.s5-ann path{display:block}.s5-notes{display:none}}
+
+@media (max-width:900px){
+  .s1-seq{height:min(64svh,140vw)!important;width:calc(min(64svh,140vw) * 1.6)!important;transform:translateX(-50%) translateY(24%) scale(var(--seqS,1))!important}
+  .s1-glow{height:70svh}
+}
 </style>
 </head>
 <body>
@@ -2797,7 +2802,7 @@ document.querySelectorAll('[data-oc]').forEach(d=>d.addEventListener('click',e=>
     st1.style.setProperty('--o1', o1.toFixed(4)); st1.style.setProperty('--p2', p2.toFixed(4)); st1.style.setProperty('--out', out.toFixed(4));
     t1.classList.toggle('on', o1 > .5); t2.classList.toggle('on', p2 > .6);
     if (narrow()) { const sh = st1.clientHeight, full = seqBox.offsetHeight || 1;
-      const kOf = (el, off) => Math.max(.28, Math.min(1, (sh - (el.getBoundingClientRect().bottom - st1.getBoundingClientRect().top - off) - 44) / full));
+      const kOf = (el, off) => Math.max(.4, Math.min(1.9, ((sh - (el.getBoundingClientRect().bottom - st1.getBoundingClientRect().top - off) - 26) + full * .24) / (full * .93)));
       const S1 = 1 - (1 - kOf(t1, 0)) * o1, S2 = 1 - (1 - kOf(t2, (1 - p2) * 22)) * p2;
       st1.style.setProperty('--seqS', Math.min(S1, S2).toFixed(4)); } else st1.style.setProperty('--seqS', '1');
   }
